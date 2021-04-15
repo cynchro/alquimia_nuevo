@@ -23,7 +23,7 @@ export class RolesService {
   }
 
   getSingle(id): Observable<any> {
-    return this.http.get(environment.apiUrl + 'role/'+id, { headers: this.headerOptions, responseType: 'json' });
+    return this.http.get(environment.apiUrl + 'role/single/'+id, { headers: this.headerOptions, responseType: 'json' });
   }
 
   postCreate(post){
@@ -35,7 +35,7 @@ export class RolesService {
 
   postEdit(post){
 
-    return this.http.post(environment.apiUrl + 'role/update/', post, {
+    return this.http.post(environment.apiUrl + 'role/store', post, {
       headers: this.headerOptions
     });
   }

@@ -28,7 +28,7 @@ class RoleController extends Controller
                 roles.id, 
                 roles.name
                 FROM 
-                roles 
+                roles
                 WHERE 
                 (roles.id=".$request->id.")";
         $rol = DB::select($SQL);
@@ -52,8 +52,9 @@ class RoleController extends Controller
         return json_encode(200);
     }
 
-    public function update(Request $request)
+    public function store(Request $request)
     { 
+        
         $SQL = "UPDATE 
                 roles 
                 SET

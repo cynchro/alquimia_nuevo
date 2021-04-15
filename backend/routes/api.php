@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('auth/signin', 'UserController@authenticate');
 
+/** PROTECTED BY JWT **/
 
 Route::group(['middleware' => ['jwt.verify']], function() {
 
@@ -35,7 +36,7 @@ Route::get('user/{id}', 'UserController@single');
 
 Route::post('user/create', 'UserController@create');
 
-Route::post('user/update', 'UserController@update');
+Route::post('user/store', 'UserController@store');
 
 Route::post('user/delete', 'UserController@delete');
 
@@ -47,7 +48,7 @@ Route::get('role/{id}', 'RoleController@single');
 
 Route::post('role/create', 'RoleController@create');
 
-Route::post('role/update', 'RoleController@update');
+Route::post('role/store', 'RoleController@store');
 
 Route::post('role/delete', 'RoleController@delete');
 

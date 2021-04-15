@@ -36,7 +36,7 @@ export class UserService {
 
   postEdit(post){
 
-    return this.http.post(environment.apiUrl + 'user/update/', post, {
+    return this.http.post(environment.apiUrl + 'user/store', post, {
       headers: this.headerOptions
     });
   }

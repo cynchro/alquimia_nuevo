@@ -174,7 +174,7 @@ class UserController extends Controller
         return json_encode(200);
     }
 
-    public function update(Request $request)
+    public function store(Request $request)
     { 
         $SQL = "UPDATE 
                 users 
