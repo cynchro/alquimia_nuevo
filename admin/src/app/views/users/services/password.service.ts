@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenStorageService } from '../../login/services/token-storage.service';
-
-const API_URL = 'http://api.boilerplate/api/';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ export class PasswordService {
 
   postCreate(post){
 
-    return this.http.post(API_URL + 'password/update', post, {
+    return this.http.post(environment.apiUrl + 'password/update', post, {
       headers: this.headerOptions
     });
 

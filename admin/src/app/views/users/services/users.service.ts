@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from '../../login/services/token-storage.service';
-
-const API_URL = 'http://api.boilerplate/api/';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,30 +20,30 @@ export class UserService {
 
   getUsers(): Observable<any> {
 
-    return this.http.get(API_URL + 'user/all', { headers: this.headerOptions, responseType: 'json' });
+    return this.http.get(environment.apiUrl + 'user/all', { headers: this.headerOptions, responseType: 'json' });
   }
 
   getSingle(id): Observable<any> {
-    return this.http.get(API_URL + 'user/'+id, { headers: this.headerOptions, responseType: 'json' });
+    return this.http.get(environment.apiUrl + 'user/'+id, { headers: this.headerOptions, responseType: 'json' });
   }
 
   postCreate(post){
 
-    return this.http.post(API_URL + 'user/create', post, {
+    return this.http.post(environment.apiUrl + 'user/create', post, {
       headers: this.headerOptions
     });
   }
 
   postEdit(post){
 
-    return this.http.post(API_URL + 'user/update/', post, {
+    return this.http.post(environment.apiUrl + 'user/update/', post, {
       headers: this.headerOptions
     });
   }
 
   delete(post){
 
-    return this.http.post(API_URL + 'user/delete', post, {
+    return this.http.post(environment.apiUrl + 'user/delete', post, {
       headers: this.headerOptions
     });
   }
