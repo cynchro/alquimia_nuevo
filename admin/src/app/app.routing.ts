@@ -85,11 +85,14 @@ export const routes: Routes = [
       {
         path: 'users',
         loadChildren: () => import('./views/users/users.module').then(m => m.UsersModule)
-      }
-      ,
+      },
       {
         path: 'roles',
         loadChildren: () => import('./views/roles/roles.module').then(m => m.RolesModule)
+      },
+      {
+        path: 'clients',
+        loadChildren: () => import('./views/clients/clients.module').then(m => m.ClientsModule)
       }
     ]
   },

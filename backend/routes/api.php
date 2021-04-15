@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('auth/signin', 'UserController@authenticate');
 
+Route::get('clients/all', 'ClientsController@all');
+
 /** PROTECTED BY JWT **/
 
 Route::group(['middleware' => ['jwt.verify']], function() {
@@ -51,6 +53,16 @@ Route::post('role/create', 'RoleController@create');
 Route::post('role/store', 'RoleController@store');
 
 Route::post('role/delete', 'RoleController@delete');
+
+/** CLIENTS **/
+
+Route::get('clients/{id}', 'ClientsController@single');
+
+Route::post('clients/create', 'ClientsController@create');
+
+Route::post('clients/store', 'ClientsController@store');
+
+Route::post('clients/delete', 'ClientsController@delete');
 
 /** PASSWORD **/
 

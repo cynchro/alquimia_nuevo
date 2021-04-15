@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-
+import { TokenStorageService } from './../app/views/login/services/token-storage.service';
 import { IconSetService } from '@coreui/icons-angular';
 import { freeSet } from '@coreui/icons';
 
@@ -13,7 +13,8 @@ import { freeSet } from '@coreui/icons';
 export class AppComponent implements OnInit {
   constructor(
     private router: Router,
-    public iconSet: IconSetService
+    public iconSet: IconSetService,
+    private tokenStorageService: TokenStorageService
   ) {
     // iconSet singleton
     iconSet.icons = { ...freeSet };
@@ -26,5 +27,6 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+    //console.log(this.tokenStorageService.getToken());
   }
 }

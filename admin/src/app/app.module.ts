@@ -46,6 +46,7 @@ import { ChartsModule } from 'ng2-charts';
 import { UsersModule } from './views/users/users.module';
 import { LoginModule } from './views/login/login.module';
 import { RolesModule } from './views/roles/roles.module';
+import { ClientsModule } from './views/clients/clients.module';
 
 @NgModule({
   imports: [
@@ -65,7 +66,8 @@ import { RolesModule } from './views/roles/roles.module';
     IconSetModule.forRoot(),
     UsersModule,
     LoginModule,
-    RolesModule
+    RolesModule,
+    ClientsModule
   ],
   declarations: [
     AppComponent,

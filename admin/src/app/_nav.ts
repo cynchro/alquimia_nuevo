@@ -31,7 +31,7 @@ export const navItems: INavData[] = [
   {
     name: 'Usuarios',
     url: '/users',
-    icon: 'icon-people',
+    icon: 'icon-user',
     children: [
       {
         name: 'administrar',
@@ -44,6 +44,11 @@ export const navItems: INavData[] = [
         icon: 'fa fa-vcard'
       }
     ]
+  },
+  {
+    name: 'Clientes',
+    url: '/clients',
+    icon: 'icon-people'
   },
   {
     name: 'Base',
