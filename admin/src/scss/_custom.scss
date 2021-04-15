@@ -1,0 +1,16 @@
+// Here you can add other styles
+.login-user{
+    margin-right: 35px;
+    font-weight: bold;
+} 
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+    .navbar-brand{
+        display: none !important;
+    }
+    
+  }
+
+
+
