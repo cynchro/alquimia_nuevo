@@ -22,16 +22,12 @@ export class TokenStorageService {
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
-  //public getToken(): string {
-    public getToken(): any {
-    if(sessionStorage.getItem(TOKEN_KEY)==null){
-      location.href="/#/login";
-    }else{
-      return sessionStorage.getItem(TOKEN_KEY);
-    }
-    
-
-    //return JSON.parse(sessionStorage.getItem(TOKEN_KEY)!);
+  public getToken(): any {
+  if(sessionStorage.getItem(TOKEN_KEY)==null){
+    location.href="/#/login";
+  }else{
+    return sessionStorage.getItem(TOKEN_KEY);
+  }
   }
 
   public saveUser(user): void {
@@ -48,6 +44,6 @@ export class TokenStorageService {
 
   public getRol(): any {
       var roles = JSON.parse(sessionStorage.getItem(USER_KEY)!);
-      return roles['roles'][0];
+      return roles['roles'];
   }  
 }

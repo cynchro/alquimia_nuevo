@@ -28,10 +28,10 @@ export class ContactsComponent{
   @ViewChild(MatSort) sort: MatSort; 
   
   constructor(private contacts: ContactsService, public modalService: BsModalService, private _flashMessagesService : FlashMessagesService) { 
-  this.getcontacts();
+  this.getAllcontacts();
   }
 
-  getcontacts(){
+  getAllcontacts(){
     this.contacts.getContacts().subscribe(
       data => { 
         this.dataSource = new MatTableDataSource(data);
@@ -73,7 +73,7 @@ export class ContactsComponent{
     this._flashMessagesService.show('El Cliente fue eliminado correctamente!', { cssClass: 'alert-success', timeout: 3000 });
   }
   this.modalRef.hide();
-  this.getcontacts();
+  this.getAllcontacts();
   });      
 }
 
