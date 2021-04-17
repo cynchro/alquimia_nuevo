@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { navItems } from '../../_nav';
-import { TokenStorageService } from '../../views/login/services/token-storage.service';
+import { TokenStorageService } from '../../_auth/services/token-storage.service';
 
 @Component({
   selector: 'app-dashboard',

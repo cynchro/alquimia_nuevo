@@ -1,41 +1,41 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ClientsComponent } from "./clients.component";
-import { ClientsCreateComponent } from "./clients.create.component";
-import { ClientsEditComponent } from "./clients.edit.component";
-import { ClientsShowComponent } from "./clients.show.component ";
+import { ContactsComponent } from "./contacts.component";
+import { ContactsCreateComponent } from "./contacts.create.component";
+import { ContactsEditComponent } from "./contacts.edit.component";
+import { ContactsShowComponent } from "./contacts.show.component ";
 import { AuthGuard } from '../../_guards/auth.guards';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: ClientsComponent,
+    component: ContactsComponent,
     canActivate: [AuthGuard], 
     data: {
-      title: 'Clientes'
+      title: 'Contactos'
     }
   },
   {
     path: 'create',
-    component: ClientsCreateComponent,
+    component: ContactsCreateComponent,
     data: {
-      title: 'Crear Cliente'
+      title: 'Crear CContacto'
     }
   },
   {
     path: 'edit/:id',
-    component: ClientsEditComponent,
+    component: ContactsEditComponent,
     data: {
-      title: 'Editar Cliente'
+      title: 'Editar Ccontacto'
     }
   }
   ,
   {
     path: 'show/:id',
-    component: ClientsShowComponent,
+    component: ContactsShowComponent,
     data: {
-      title: 'Informacion del Cliente'
+      title: 'Informacion del Contacto'
     }
   }
 ];

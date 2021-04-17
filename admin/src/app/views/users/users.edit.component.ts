@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RoleService } from './services/role.service';
+import { RolesService } from '../roles/services/roles.service';
 import { UserService } from './services/users.service';
 import { FlashMessagesService } from 'flash-messages-angular';
 
@@ -19,11 +19,11 @@ export class UsersEditComponent implements OnInit {
   roles: string;
   isShown: boolean = false;
 
-  constructor(private route: ActivatedRoute, private users: UserService, private role: RoleService, private _FlashMessagesService: FlashMessagesService) { }
+  constructor(private route: ActivatedRoute, private users: UserService, private role: RolesService, private _FlashMessagesService: FlashMessagesService) { }
 
   ngOnInit(): void {
     this.users.getSingle(this.route.snapshot.params.id).subscribe(val => this.user = val[0]);
-    this.role.getRole().subscribe(
+    this.role.getRoles().subscribe(
       data => {
         this.roles = data;
         this.id = this.route.snapshot.params.id;

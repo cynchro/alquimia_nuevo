@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from './services/role.service';
+import { RolesService } from '../roles/services/roles.service';
 import { UserService } from './services/users.service';
 import { FlashMessagesService } from 'flash-messages-angular';
 
@@ -13,10 +13,10 @@ export class UsersCreateComponent implements OnInit {
   title = "Crear Usuario"
   roles: string;
 
-  constructor(private role : RoleService, private _flashMessagesService : FlashMessagesService, private users : UserService) { }
+  constructor(private role : RolesService, private _flashMessagesService : FlashMessagesService, private users : UserService) { }
 
   ngOnInit(): void {
-    this.role.getRole().subscribe(
+    this.role.getRoles().subscribe(
       data => {
         this.roles = data;
       },

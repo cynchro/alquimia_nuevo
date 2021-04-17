@@ -7,42 +7,43 @@ import { environment } from '../../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class RolesService {
+export class ContactsService {
 
   constructor(private http: HttpClient, private tokenStorageService: TokenStorageService) { }
 
-  headerOptions = new HttpHeaders({ 
+ headerOptions = new HttpHeaders({ 
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
     'Authorization': 'Bearer ' + this.tokenStorageService.getToken()
  });
 
-  getRoles(): Observable<any> {
-    return this.http.get(environment.apiUrl + 'role/all', { headers: this.headerOptions, responseType: 'json' });
+  getContacts(): Observable<any> {
+
+    return this.http.get(environment.apiUrl + 'contacts/all', { headers: this.headerOptions, responseType: 'json' });
   }
 
   getSingle(id): Observable<any> {
-    return this.http.get(environment.apiUrl + 'role/'+id, { headers: this.headerOptions, responseType: 'json' });
+    return this.http.get(environment.apiUrl + 'contacts/'+id, { headers: this.headerOptions, responseType: 'json' });
   }
 
   postCreate(post){
 
-    return this.http.post(environment.apiUrl + 'role/create', post, {
+    return this.http.post(environment.apiUrl + 'contacts/create', post, {
       headers: this.headerOptions
     });
   }
 
   postEdit(post){
 
-    return this.http.post(environment.apiUrl + 'role/store', post, {
+    return this.http.post(environment.apiUrl + 'contacts/store', post, {
       headers: this.headerOptions
     });
   }
 
   delete(post){
 
-    return this.http.post(environment.apiUrl + 'role/delete', post, {
+    return this.http.post(environment.apiUrl + 'contacts/delete', post, {
       headers: this.headerOptions
     });
   }

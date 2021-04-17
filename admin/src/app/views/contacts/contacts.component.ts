@@ -2,7 +2,7 @@ import { Component,TemplateRef, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ClientsService } from './services/clients.service';
+import { ContactsService } from './services/contacts.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FlashMessagesService } from 'flash-messages-angular';
@@ -12,11 +12,11 @@ import { FlashMessagesService } from 'flash-messages-angular';
  * @title Basic use of `<table mat-table>`
  */
 @Component({
-  templateUrl: './templates/clients.component.html',
-  styleUrls: ['./css/clients.component.scss']
+  templateUrl: './templates/contacts.component.html',
+  styleUrls: ['./css/contacts.component.scss']
 })
 
-export class ClientsComponent{
+export class ContactsComponent{
 
   title = 'Clientes';
   content: string;
@@ -27,13 +27,13 @@ export class ClientsComponent{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort; 
   
-  constructor(private clients: ClientsService, public modalService: BsModalService, private _flashMessagesService : FlashMessagesService) { 
-  this.getAllClients();
+  constructor(private contacts: ContactsService, public modalService: BsModalService, private _flashMessagesService : FlashMessagesService) { 
+  this.getcontacts();
   }
 
-  getAllClients(){
-    this.clients.getClients().subscribe(
-      data => {
+  getcontacts(){
+    this.contacts.getContacts().subscribe(
+      data => { 
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -66,17 +66,17 @@ export class ClientsComponent{
     "id": (<HTMLInputElement>document.getElementById("user_id")).value
   };
 
-  this.clients.delete(data)
+  this.contacts.delete(data)
 
   .subscribe(response => {
   if(response==200){
     this._flashMessagesService.show('El Cliente fue eliminado correctamente!', { cssClass: 'alert-success', timeout: 3000 });
   }
   this.modalRef.hide();
-  this.getAllClients();
-  });
+  this.getcontacts();
+  });      
 }
 
-  ngOnInit(): void {  }
-  
+  ngOnInit(): void { }
+
 }

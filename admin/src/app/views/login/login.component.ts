@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
-import { TokenStorageService } from './services/token-storage.service';
+import { AuthService } from '../../_auth/services/auth.service';
+import { TokenStorageService } from '../../_auth/services/token-storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.authService.login(this.form).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.token);
+        this.tokenStorage.saveToken(data['token']);
         this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;

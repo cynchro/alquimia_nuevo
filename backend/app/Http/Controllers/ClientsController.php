@@ -2,12 +2,7 @@
 namespace App\Http\Controllers;
 Use Exception;
 
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\DB;
 
 class ClientsController extends Controller
@@ -32,7 +27,6 @@ class ClientsController extends Controller
 
     public function single(Request $request)
     {
-        
         $SQL =  "SELECT
                 clients.id,
                 clients.name, 

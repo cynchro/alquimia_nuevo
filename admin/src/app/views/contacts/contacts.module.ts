@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
 import { MaterialModules } from '../../material/material.modules';
-import { ClientsComponent } from "./clients.component";
-import { ClientsEditComponent } from "./clients.edit.component";
-import { ClientsCreateComponent } from "./clients.create.component";
-import { ClientsShowComponent } from "./clients.show.component ";
-import { UsersRoutingModule } from "./clients.routing.module";
+import { ContactsComponent } from "./contacts.component";
+import { ContactsEditComponent } from "./contacts.edit.component";
+import { ContactsCreateComponent } from "./contacts.create.component";
+import { ContactsShowComponent } from "./contacts.show.component ";
+import { UsersRoutingModule } from "./contacts.routing.module";
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
 import { FlashMessagesModule } from 'flash-messages-angular';
@@ -17,10 +17,10 @@ import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
-    ClientsComponent,
-    ClientsEditComponent,
-    ClientsCreateComponent,
-    ClientsShowComponent
+    ContactsComponent,
+    ContactsEditComponent,
+    ContactsCreateComponent,
+    ContactsShowComponent
   ],
   imports: [
     UsersRoutingModule,
@@ -35,6 +35,6 @@ import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
     BsModalRef
   ]
 })
-export class ClientsModule { 
+export class ContactsModule { 
   constructor() {}
 }
