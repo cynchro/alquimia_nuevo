@@ -34,7 +34,7 @@
     <flash-messages></flash-messages>
     </div>
     <div class="card-footer">
-      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Editar</button>
+      
     </div>
 </div>
 </div>
@@ -42,6 +42,7 @@
   <div class="card">
     <h5 class="card-header d-flex justify-content-between align-items-center">
       {{ title_table }}
+      <button data-toggle="modal" (click)="createModal()" class="create-btn"><mat-icon class="create-icon">add_circle</mat-icon></button>
     </h5>
     <div class="card-body">
   
@@ -66,12 +67,6 @@
           <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
-      
-        <!-- Email Column -->
-        <ng-container matColumnDef="email">
-          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-        </ng-container>
   
         <!-- Phone Number Column -->
         <ng-container matColumnDef="phone_number">
@@ -86,15 +81,15 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <a href="#/clients/show/{{element.id}}" mat-menu-item>
+            <button data-toggle="modal" (click)="showModal(template,element.id)" mat-menu-item>
                 <mat-icon>manage_search</mat-icon> 
                 <span>Ver</span>
-              </a>
-              <a href="#/clients/edit/{{element.id}}" mat-menu-item>
+            </button>
+              <button data-toggle="modal" (click)="editModal(template,element.id)" mat-menu-item>
                 <mat-icon>edit</mat-icon> 
                 <span>Editar</span>
-              </a>
-              <button data-toggle="modal" (click)="openModal(template,element.id)" mat-menu-item>
+              </button>
+              <button data-toggle="modal" (click)="deleteModal(template,element.id)" mat-menu-item>
                 <mat-icon>delete</mat-icon>
                 <span>Eliminar</span>
               </button>
@@ -114,5 +109,194 @@
   </div>
   </div>
     </div>
+
+<!-- Modal -->
+<ng-template #show>
+  <div class="modal-header">
+    <h4 class="modal-title">Contacto</h4>
+    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-user"></i></span>
+        </div>
+        <input type="text" id="name" name="name" placeholder="Nombre" class="form-control" [ngModel]="cnt['name']" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-phone"></i></span>
+        </div>
+        <input type="phone" id="phone" name="phone" placeholder="Telefono" class="form-control" [ngModel]="cnt['phone_number']" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+        </div>
+        <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" class="form-control" [ngModel]="cnt['email']" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-home"></i></span>
+        </div>
+        <input type="text" id="address" name="address" placeholder="Direccion" class="form-control" [ngModel]="cnt['address']" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-map"></i></span>
+        </div>
+        <input type="text" id="city" name="city" placeholder="Ciudad" class="form-control" [ngModel]="cnt['city']" disabled>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
+  </div>
+  <input type="hidden" name="id" id="user_id" value="{{modalService.config.initialState.id}}"/>
+</ng-template>
     
-  
+<!-- Modal -->
+<ng-template #edit>
+  <form #myform="ngForm" (ngSubmit)="updateContact(myform)" class="form form-update">
+  <div class="modal-header">
+    <h4 class="modal-title">Editar</h4>
+    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-user"></i></span>
+        </div>
+        <input type="text" id="name" name="name" placeholder="Nombre" class="form-control" [ngModel]="cnt['name']">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-phone"></i></span>
+        </div>
+        <input type="phone" id="phone" name="phone_number" placeholder="Telefono" class="form-control" [ngModel]="cnt['phone_number']">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+        </div>
+        <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" class="form-control" [ngModel]="cnt['email']">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-home"></i></span>
+        </div>
+        <input type="text" id="address" name="address" placeholder="Direccion" class="form-control" [ngModel]="cnt['address']">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-map"></i></span>
+        </div>
+        <input type="text" id="city" name="city" placeholder="Ciudad" class="form-control" [ngModel]="cnt['city']">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+  </div>
+  <input type="hidden" name="contact_id" id="contact_id" [ngModel]="cnt['id']"/>
+</form>
+</ng-template>
+
+<!-- Modal -->
+<ng-template #delete>
+  <div class="modal-header">
+    <h4 class="modal-title">Eliminar</h4>
+    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>¿Esta seguro que desea eliminar este registro?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
+    <button type="button" class="btn btn-primary" (click)="deleted()">Continuar</button>
+  </div>
+  <input type="hidden" name="id" id="contact_id" value="{{modalService.config.initialState.id}}"/>
+</ng-template>
+
+<!-- Modal -->
+<ng-template #create>
+  <form #myform="ngForm" (ngSubmit)="createContact(myform)" class="form form-create">
+  <div class="modal-header">
+    <h4 class="modal-title">Crear</h4>
+    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-user"></i></span>
+        </div>
+        <input type="text" id="name" name="name" placeholder="Nombre" class="form-control" [ngModel]="cnt['name']">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-phone"></i></span>
+        </div>
+        <input type="phone" id="phone" name="phone_number" placeholder="Telefono" class="form-control" [ngModel]="cnt['phone_number']">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+        </div>
+        <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" class="form-control" [ngModel]="cnt['email']">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-home"></i></span>
+        </div>
+        <input type="text" id="address" name="address" placeholder="Direccion" class="form-control" [ngModel]="cnt['address']">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-map"></i></span>
+        </div>
+        <input type="text" id="city" name="city" placeholder="Ciudad" class="form-control" [ngModel]="cnt['city']">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+  </div>
+</form>
+</ng-template>

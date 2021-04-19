@@ -47,6 +47,7 @@ import { UsersModule } from './views/users/users.module';
 import { LoginModule } from './views/login/login.module';
 import { RolesModule } from './views/roles/roles.module';
 import { ClientsModule } from './views/clients/clients.module';
+import { DialogModule } from './views/dialog/dialog.module';
 
 @NgModule({
   imports: [
@@ -67,7 +68,8 @@ import { ClientsModule } from './views/clients/clients.module';
     UsersModule,
     LoginModule,
     RolesModule,
-    ClientsModule
+    ClientsModule,
+    DialogModule
   ],
   declarations: [
     AppComponent,

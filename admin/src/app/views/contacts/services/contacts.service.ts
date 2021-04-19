@@ -18,10 +18,21 @@ export class ContactsService {
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
     'Authorization': 'Bearer ' + this.tokenStorageService.getToken()
  });
-
+/*
   getContacts(): Observable<any> {
 
-    return this.http.get(environment.apiUrl + 'contacts/all', { headers: this.headerOptions, responseType: 'json' }).pipe(
+    return this.http.get(environment.apiUrl + 'contacts/all/', { headers: this.headerOptions, responseType: 'json' }).pipe(
+      catchError((err) => {
+        console.log('error caught in contacts service')
+        console.error(err['error']['message']);
+        return throwError(err);
+      })
+    );
+  }*/
+
+  getClientsContacts(id): Observable<any> {
+
+    return this.http.get(environment.apiUrl + 'contacts/all/'+id, { headers: this.headerOptions, responseType: 'json' }).pipe(
       catchError((err) => {
         console.log('error caught in contacts service')
         console.error(err['error']['message']);
@@ -30,7 +41,7 @@ export class ContactsService {
     );
   }
 
-  getSingle(id): Observable<any> {
+  getSingleClientsContacts(id): Observable<any> {
     return this.http.get(environment.apiUrl + 'contacts/'+id, { headers: this.headerOptions, responseType: 'json' }).pipe(
       catchError((err) => {
         console.log('error caught in contacts service')
@@ -45,7 +56,7 @@ export class ContactsService {
     return this.http.post(environment.apiUrl + 'contacts/create', post, { headers: this.headerOptions }).pipe(
       catchError((err) => {
         console.log('error caught in contacts service')
-        console.error(err['error']['message']);
+        console.error(err['error']);
         return throwError(err);
       })
     );

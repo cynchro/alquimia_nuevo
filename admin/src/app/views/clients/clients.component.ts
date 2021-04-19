@@ -2,6 +2,7 @@ import { Component,TemplateRef, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 import { ClientsService } from './services/clients.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -27,7 +28,12 @@ export class ClientsComponent{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort; 
   
-  constructor(private clients: ClientsService, public modalService: BsModalService, private _flashMessagesService : FlashMessagesService) { 
+  constructor(
+    private clients: ClientsService, 
+    public modalService: BsModalService, 
+    private _flashMessagesService : FlashMessagesService,
+    public dialog: MatDialog
+    ) { 
   this.getAllClients();
   }
 

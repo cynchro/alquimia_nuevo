@@ -69,14 +69,15 @@ Route::get('clients/{id}', 'ClientsController@single');
 
 /** CONTACTS**/
 
-
 Route::post('contacts/create', 'ContactsController@create');
 
 Route::post('contacts/store', 'ContactsController@store');
 
 Route::post('contacts/delete', 'ContactsController@delete');
 
-Route::get('contacts/all', 'ContactsController@all');
+Route::get('contacts/all/{id}', 'ContactsController@all');
+
+Route::get('contacts/single/{id}', 'ContactsController@single');
 
 Route::get('contacts/{id}', 'ContactsController@single');
 

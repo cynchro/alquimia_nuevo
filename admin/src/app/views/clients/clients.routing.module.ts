@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ClientsComponent } from "./clients.component";
 import { ClientsCreateComponent } from "./clients.create.component";
 import { ClientsEditComponent } from "./clients.edit.component";
-import { ClientsShowComponent } from "./clients.show.component ";
+import { ClientsShowComponent } from "./clients.show.component";
 import { AuthGuard } from '../../_guards/auth.guards';
 
 
@@ -29,8 +29,7 @@ const routes: Routes = [
     data: {
       title: 'Editar Cliente'
     }
-  }
-  ,
+  },
   {
     path: 'show/:id',
     component: ClientsShowComponent,

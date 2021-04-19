@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClientsService } from './services/clients.service';
-import { ContactsService } from '../contacts/services/contacts.service';
 import { FlashMessagesService } from 'flash-messages-angular';
 
 @Component({
@@ -20,7 +19,10 @@ export class ClientsEditComponent implements OnInit {
   roles: string;
   isShown: boolean = false;
 
-  constructor(private route: ActivatedRoute, private clients: ClientsService, private contacts: ContactsService, private _FlashMessagesService: FlashMessagesService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private clients: ClientsService, 
+    private _FlashMessagesService: FlashMessagesService) { }
 
   ngOnInit(): void {
 

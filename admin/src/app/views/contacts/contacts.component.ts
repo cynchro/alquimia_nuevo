@@ -6,6 +6,7 @@ import { ContactsService } from './services/contacts.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FlashMessagesService } from 'flash-messages-angular';
+import { ActivatedRoute } from '@angular/router';
 
 
 /**

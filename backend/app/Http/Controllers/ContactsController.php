@@ -15,16 +15,18 @@ class ContactsController extends Controller
     public function all(Request $request)
     {
         $SQL = "SELECT
-                contacts.id,
-                contacts.name, 
-                contacts.email,
-                contacts.phone_number,
-                contacts.address,
-                contacts.city,
-                contacts.ruc
+                clientsContact.id,
+                clientsContact.client_id,
+                clientsContact.name, 
+                clientsContact.email,
+                clientsContact.phone_number,
+                clientsContact.address,
+                clientsContact.city,
+                clientsContact.ruc
                 FROM 
-                contacts
-                ";
+                clientsContact
+                WHERE
+                clientsContact.client_id=".$request->id."";
         $contacts = DB::select($SQL);
 
         return json_encode($contacts);
@@ -34,17 +36,17 @@ class ContactsController extends Controller
     {
         
         $SQL =  "SELECT
-                contacts.id,
-                contacts.client_id,
-                contacts.name, 
-                contacts.email,
-                contacts.phone_number,
-                contacts.address,
-                contacts.city,
-                contacts.ruc
+                clientsContact.id,
+                clientsContact.client_id,
+                clientsContact.name, 
+                clientsContact.email,
+                clientsContact.phone_number,
+                clientsContact.address,
+                clientsContact.city,
+                clientsContact.ruc
                 FROM 
-                contacts
-                WHERE (contacts.id=1)";
+                clientsContact
+                WHERE (clientsContact.id=".$request->id.")";
         $contacts = DB::select($SQL);
 
         return json_encode($contacts);
@@ -53,24 +55,22 @@ class ContactsController extends Controller
     public function create(Request $request)
     { 
         $SQL = "INSERT INTO 
-                contacts 
-                (contacts.client_id,
-                contacts.name, 
-                contacts.email,
-                contacts.phone_number,
-                contacts.address,
-                contacts.city,
-                contacts.ruc,
-                created_at,
-                updated_at)
+                clientsContact 
+                (clientsContact.client_id,
+                clientsContact.name, 
+                clientsContact.email,
+                clientsContact.phone_number,
+                clientsContact.address,
+                clientsContact.city,
+                clientsContact.created_at,
+                clientsContact.updated_at)
                 VALUES 
-                ".$request->cli.",
-                ('".$request->name."',
+                (".$request->cli.",
+                '".$request->name."',
                 '".$request->email."',
                 ".$request->phone_number.",
                 '".$request->address."',
                 '".$request->city."',
-                ".$request->ruc.",
                 '".NOW()."',
                 '".NOW()."')";
         try{
@@ -85,17 +85,16 @@ class ContactsController extends Controller
     public function store(Request $request)
     { 
         $SQL = "UPDATE 
-                contacts 
+                clientsContact 
                 SET
-                contacts.name='".$request->name."', 
-                contacts.email='".$request->email."',
-                contacts.phone_number=".$request->phone_number.",
-                contacts.address='".$request->address."',
-                contacts.city='".$request->city."',
-                contacts.ruc=".$request->ruc.",
-                updated_at='".NOW()."'
+                clientsContact.name='".$request->name."', 
+                clientsContact.email='".$request->email."',
+                clientsContact.phone_number=".$request->phone_number.",
+                clientsContact.address='".$request->address."',
+                clientsContact.city='".$request->city."',
+                clientsContact.updated_at='".NOW()."'
                 WHERE
-                (contacts.id=".$request->id.")";
+                (clientsContact.id=".$request->id.")";
         try{
             DB::update($SQL);
         }
@@ -110,9 +109,9 @@ class ContactsController extends Controller
     { 
         $SQL = "DELETE 
                 FROM 
-                contacts
+                clientsContact
                 WHERE
-                (contacts.id=".$request->id.")";
+                (clientsContact.id=".$request->id.")";
         try{
             DB::delete($SQL);
         }
