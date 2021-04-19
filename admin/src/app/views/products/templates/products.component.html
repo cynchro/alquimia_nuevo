@@ -24,7 +24,7 @@
       <!-- Name Column -->
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef > Nombre </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.description}} asdsdasdsadsad dsadsadhb jas dsahgd sad xxx</mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
       </ng-container>
     
       <!-- Email Column -->
@@ -52,11 +52,11 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <a href="#/clients/show/{{element.id}}" mat-menu-item>
+            <a href="#/products/show/{{element.id}}" mat-menu-item>
               <mat-icon>manage_search</mat-icon> 
               <span>Ver</span>
             </a>
-            <a href="#/clients/edit/{{element.id}}" mat-menu-item>
+            <a href="#/products/edit/{{element.id}}" mat-menu-item>
               <mat-icon>edit</mat-icon> 
               <span>Editar</span>
             </a>

@@ -31,9 +31,9 @@ export class ProductsService {
   }
   
   getSingle(id): Observable<any> {
-    return this.http.get(environment.apiUrl + 'clients/'+id, { headers: this.headerOptions, responseType: 'json' }).pipe(
+    return this.http.get(environment.apiUrl + 'products/'+id, { headers: this.headerOptions, responseType: 'json' }).pipe(
       catchError((err) => {
-        console.log('error caught in clients service')
+        console.log('error caught in products service')
         console.error(err['error']['message']);
         return throwError(err);
       })
@@ -41,9 +41,9 @@ export class ProductsService {
   }
 
   postCreate(post){
-    return this.http.post(environment.apiUrl + 'clients/create', post, { headers: this.headerOptions }).pipe(
+    return this.http.post(environment.apiUrl + 'products/create', post, { headers: this.headerOptions }).pipe(
       catchError((err) => {
-        console.log('error caught in clients service')
+        console.log('error caught in products service')
         console.error(err['error']['message']);
         return throwError(err);
       })
@@ -51,9 +51,9 @@ export class ProductsService {
   }
 
   postEdit(post){
-    return this.http.post(environment.apiUrl + 'clients/store', post, { headers: this.headerOptions }).pipe(
+    return this.http.post(environment.apiUrl + 'products/store', post, { headers: this.headerOptions }).pipe(
       catchError((err) => {
-        console.log('error caught in clients service')
+        console.log('error caught in products service')
         console.error(err['error']['message']);
         return throwError(err);
       })
@@ -61,9 +61,9 @@ export class ProductsService {
   }
 
   delete(post){
-    return this.http.post(environment.apiUrl + 'clients/delete', post, { headers: this.headerOptions }).pipe(
+    return this.http.post(environment.apiUrl + 'products/delete', post, { headers: this.headerOptions }).pipe(
       catchError((err) => {
-        console.log('error caught in clients service')
+        console.log('error caught in products service')
         console.error(err['error']['message']);
         return throwError(err);
       })

@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
 
 export class ProductsShowComponent {
 
-  title_form = "Informacion de Cliente";
+  title_form = "Informacion de Producto";
   title_table = "Contactos de Cliente";
   content: string;
   displayedColumns: string[] = ['id', 'name', 'phone_number', 'actions'];
@@ -38,7 +38,7 @@ export class ProductsShowComponent {
 
   id: number;
   data = [];
-  cli = [];
+  prd = [];
   cnt = [];
   roles: string;
   isShown: boolean = false;
@@ -139,7 +139,7 @@ export class ProductsShowComponent {
   }
 
   ngOnInit(): void {
-    this.products.getSingle(this.route.snapshot.params.id).subscribe(val => this.cli = val[0]);
+    this.products.getSingle(this.route.snapshot.params.id).subscribe(val => this.prd = val[0]);
   };
 
    handleError(error: Response) {
@@ -186,7 +186,7 @@ export class ProductsShowComponent {
     if(response==200){
       this._flashMessagesService.show('El Cliente fue editado correctamente!', { cssClass: 'alert-success', timeout: 3000 });
     }
-    this.products.getSingle(this.route.snapshot.params.id).subscribe(val => this.cli = val[0]);
+    this.products.getSingle(this.route.snapshot.params.id).subscribe(val => this.prd = val[0]);
     });
     
   }

@@ -10,11 +10,11 @@ import { FlashMessagesService } from 'flash-messages-angular';
 })
 export class ProductsEditComponent implements OnInit {
 
-  title = "Editar Usuario";
+  title = "Editar Producto";
 
   id: number;
   data = [];
-  cli = [];
+  prd = [];
   cnt = [];
   roles: string;
   isShown: boolean = false;
@@ -26,7 +26,7 @@ export class ProductsEditComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.products.getSingle(this.route.snapshot.params.id).subscribe(val => this.cli = val[0]);
+    this.products.getSingle(this.route.snapshot.params.id).subscribe(val => this.prd = val[0]);
 
    };
 
@@ -35,12 +35,14 @@ export class ProductsEditComponent implements OnInit {
 
     let data = {
       "id": form.value.id,
-      "name": form.value.name,
-      "ruc": form.value.ruc,
-      "email": form.value.email,
-      "phone_number": form.value.phone_number,
-      "address": form.value.address,
-      "city": form.value.city,
+      "item": form.value.item,
+      "description": form.value.description,
+      "barcode": form.value.barcode,
+      "china": form.value.china,
+      "uy": form.value.uy,
+      "may": form.value.may,
+      "stock": form.value.stock,
+      "stock_min": form.value.stock_min,
     };
 
     this.products.postEdit(data)
@@ -49,7 +51,7 @@ export class ProductsEditComponent implements OnInit {
     if(response==200){
       this._FlashMessagesService.show('El Cliente fue editado correctamente!', { cssClass: 'alert-success', timeout: 3000 });
     }
-    this.products.getSingle(this.route.snapshot.params.id).subscribe(val => this.cli = val[0]);
+    this.products.getSingle(this.route.snapshot.params.id).subscribe(val => this.prd = val[0]);
     });
     
   }

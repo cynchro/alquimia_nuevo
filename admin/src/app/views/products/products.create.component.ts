@@ -23,19 +23,22 @@ export class ProductsCreateComponent implements OnInit {
   create(form) {
 
     let data = {
-      "name": form.value.name,
-      "ruc": form.value.ruc,
-      "email": form.value.email,
-      "phone_number": form.value.phone_number,
-      "address": form.value.address,
-      "city": form.value.city
+      "id": form.value.id,
+      "item": form.value.item,
+      "description": form.value.description,
+      "barcode": form.value.barcode,
+      "china": form.value.china,
+      "uy": form.value.uy,
+      "may": form.value.may,
+      "stock": form.value.stock,
+      "stock_min": form.value.stock_min,
     };
 
     this.products.postCreate(data)
 
     .subscribe(response => {
     if(response==200){
-      this._flashMessagesService.show('El Cliente fue creado correctamente!', { cssClass: 'alert-success', timeout: 3000 });
+      this._flashMessagesService.show('El Producto fue creado correctamente!', { cssClass: 'alert-success', timeout: 3000 });
     }
       
     });

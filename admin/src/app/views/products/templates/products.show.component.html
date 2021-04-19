@@ -1,302 +1,50 @@
 
   <div class="row">
-    <div class="col-sm-6 col-md-6">
+    <div class="col">
     <div class="card">
       <h4 class="card-header d-flex justify-content-between align-items-center">
         {{ title_form }}
       </h4>
       <div class="card-body">
+        <div class="form-group">
+          <label for="name">Codigo de producto</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese el nombre de cliente" [ngModel]="prd['item']" disabled>
+        </div>
       <div class="form-group">
         <label for="name">Nombre</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese el nombre de cliente" [ngModel]="cli['name']" disabled>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese el nombre de cliente" [ngModel]="prd['description']" disabled>
       </div>
       <div class="form-group">
-        <label for="phone_number">RUC</label>
-        <input type="number" class="form-control" id="ruc" name="ruc" placeholder="Ingrese su RUC" [ngModel]="cli['ruc']" disabled>
+        <label for="email">Codigo de barra</label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="Ingrese su correo electronico" [ngModel]="prd['barcode']" disabled>
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" name="email" placeholder="Ingrese su correo electronico" [ngModel]="cli['email']" disabled>
+        <label for="phone_number">China</label>
+        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Ingrese su telefono" [ngModel]="prd['china']" disabled>
       </div>
       <div class="form-group">
-        <label for="phone_number">Telefono</label>
-        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Ingrese su telefono" [ngModel]="cli['phone_number']" disabled>
+        <label for="phone_number">Uruguay</label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="Ingrese su direccion" [ngModel]="prd['uy']" disabled>
       </div>
       <div class="form-group">
-        <label for="phone_number">Direccion</label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="Ingrese su direccion" [ngModel]="cli['address']" disabled>
+        <label for="phone_number">Mayorista</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="Ingrese su ciudad" [ngModel]="prd['may']" disabled>
       </div>
       <div class="form-group">
-        <label for="phone_number">Ciudad</label>
-        <input type="text" class="form-control" id="city" name="city" placeholder="Ingrese su ciudad" [ngModel]="cli['city']" disabled>
+        <label for="phone_number">Stock</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="Ingrese su ciudad" [ngModel]="prd['stock']" disabled>
       </div>
-      <input type="hidden" class="form-control" id="id" name="id" [ngModel]="cli['id']">
+      <div class="form-group">
+        <label for="phone_number">Stock Minimo</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="Ingrese su ciudad" [ngModel]="prd['stock_min']" disabled>
+      </div>
+      <input type="hidden" class="form-control" id="id" name="id" [ngModel]="prd['id']">
     <flash-messages></flash-messages>
     </div>
     <div class="card-footer">
-      
+      <a type="button" href="#/products" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Volver</a>
     </div>
 </div>
 </div>
-<div class="col-sm-6 col-md-6">
-  <div class="card">
-    <h5 class="card-header d-flex justify-content-between align-items-center">
-      {{ title_table }}
-      <button data-toggle="modal" (click)="createModal()" class="create-btn"><mat-icon class="create-icon">add_circle</mat-icon></button>
-    </h5>
-    <div class="card-body">
-  
-      <mat-form-field>
-        <mat-label>Filtro</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
-      </mat-form-field>
-  
-      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-      
-        <!-- Id Column -->
-        <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef> Id. </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-        </ng-container>
-      
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-        </ng-container>
-  
-        <!-- Phone Number Column -->
-        <ng-container matColumnDef="phone_number">
-          <mat-header-cell *matHeaderCellDef> Telefono </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.phone_number}} </mat-cell>
-        </ng-container>
-  
-        <ng-container matColumnDef="actions">
-          <mat-header-cell  *matHeaderCellDef > &nbsp; </mat-header-cell>
-          <mat-cell *matCellDef="let element" >
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-            <button data-toggle="modal" (click)="showModal(template,element.id)" mat-menu-item>
-                <mat-icon>manage_search</mat-icon> 
-                <span>Ver</span>
-            </button>
-              <button data-toggle="modal" (click)="editModal(template,element.id)" mat-menu-item>
-                <mat-icon>edit</mat-icon> 
-                <span>Editar</span>
-              </button>
-              <button data-toggle="modal" (click)="deleteModal(template,element.id)" mat-menu-item>
-                <mat-icon>delete</mat-icon>
-                <span>Eliminar</span>
-              </button>
-            </mat-menu>
-          </mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr>
-      </mat-table>
-      <flash-messages></flash-messages>
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-    </div>
-  </div>
-  </div>
-    </div>
+</div>
 
-<!-- Modal -->
-<ng-template #show>
-  <div class="modal-header">
-    <h4 class="modal-title">Contacto</h4>
-    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-user"></i></span>
-        </div>
-        <input type="text" id="name" name="name" placeholder="Nombre" class="form-control" [ngModel]="cnt['name']" disabled>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-phone"></i></span>
-        </div>
-        <input type="phone" id="phone" name="phone" placeholder="Telefono" class="form-control" [ngModel]="cnt['phone_number']" disabled>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-        </div>
-        <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" class="form-control" [ngModel]="cnt['email']" disabled>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-home"></i></span>
-        </div>
-        <input type="text" id="address" name="address" placeholder="Direccion" class="form-control" [ngModel]="cnt['address']" disabled>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-map"></i></span>
-        </div>
-        <input type="text" id="city" name="city" placeholder="Ciudad" class="form-control" [ngModel]="cnt['city']" disabled>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
-  </div>
-  <input type="hidden" name="id" id="user_id" value="{{modalService.config.initialState.id}}"/>
-</ng-template>
-    
-<!-- Modal -->
-<ng-template #edit>
-  <form #myform="ngForm" (ngSubmit)="updateContact(myform)" class="form form-update">
-  <div class="modal-header">
-    <h4 class="modal-title">Editar</h4>
-    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-user"></i></span>
-        </div>
-        <input type="text" id="name" name="name" placeholder="Nombre" class="form-control" [ngModel]="cnt['name']">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-phone"></i></span>
-        </div>
-        <input type="phone" id="phone" name="phone_number" placeholder="Telefono" class="form-control" [ngModel]="cnt['phone_number']">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-        </div>
-        <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" class="form-control" [ngModel]="cnt['email']">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-home"></i></span>
-        </div>
-        <input type="text" id="address" name="address" placeholder="Direccion" class="form-control" [ngModel]="cnt['address']">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-map"></i></span>
-        </div>
-        <input type="text" id="city" name="city" placeholder="Ciudad" class="form-control" [ngModel]="cnt['city']">
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
-    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
-  </div>
-  <input type="hidden" name="contact_id" id="contact_id" [ngModel]="cnt['id']"/>
-</form>
-</ng-template>
-
-<!-- Modal -->
-<ng-template #delete>
-  <div class="modal-header">
-    <h4 class="modal-title">Eliminar</h4>
-    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>¿Esta seguro que desea eliminar este registro?</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
-    <button type="button" class="btn btn-primary" (click)="deleted()">Continuar</button>
-  </div>
-  <input type="hidden" name="id" id="contact_id" value="{{modalService.config.initialState.id}}"/>
-</ng-template>
-
-<!-- Modal -->
-<ng-template #create>
-  <form #myform="ngForm" (ngSubmit)="createContact(myform)" class="form form-create">
-  <div class="modal-header">
-    <h4 class="modal-title">Crear</h4>
-    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-user"></i></span>
-        </div>
-        <input type="text" id="name" name="name" placeholder="Nombre" class="form-control" [ngModel]="cnt['name']">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-phone"></i></span>
-        </div>
-        <input type="phone" id="phone" name="phone_number" placeholder="Telefono" class="form-control" [ngModel]="cnt['phone_number']">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-        </div>
-        <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" class="form-control" [ngModel]="cnt['email']">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-home"></i></span>
-        </div>
-        <input type="text" id="address" name="address" placeholder="Direccion" class="form-control" [ngModel]="cnt['address']">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-map"></i></span>
-        </div>
-        <input type="text" id="city" name="city" placeholder="Ciudad" class="form-control" [ngModel]="cnt['city']">
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
-    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
-  </div>
-</form>
-</ng-template>
