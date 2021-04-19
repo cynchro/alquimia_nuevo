@@ -51,6 +51,23 @@ export const navItems: INavData[] = [
     icon: 'icon-people'
   },
   {
+    name: 'Productos',
+    url: '/products',
+    icon: 'icon-briefcase',
+    children: [
+      {
+        name: 'administrar',
+        url: '/products',
+        icon: 'fa fa-gear fa-lg'
+      },
+      {
+        name: 'Compras',
+        url: '/purchases',
+        icon: 'icon-basket'
+      }
+    ]
+  },
+  {
     name: 'Base',
     url: '/base',
     icon: 'icon-puzzle',

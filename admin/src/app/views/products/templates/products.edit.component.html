@@ -1,0 +1,40 @@
+<form #myform="ngForm" (ngSubmit)="update(myform)" class="form form-create">
+  <div class="card">
+      <h4 class="card-header d-flex justify-content-between align-items-center">
+        {{ title }}
+      </h4>
+      <div class="card-body">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese el nombre de cliente" [ngModel]="cli['name']">
+      </div>
+      <div class="form-group">
+        <label for="phone_number">RUC</label>
+        <input type="number" class="form-control" id="ruc" name="ruc" placeholder="Ingrese su RUC" [ngModel]="cli['ruc']">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="Ingrese su correo electronico" [ngModel]="cli['email']">
+      </div>
+      <div class="form-group">
+        <label for="phone_number">Telefono</label>
+        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Ingrese su telefono" [ngModel]="cli['phone_number']">
+      </div>
+      <div class="form-group">
+        <label for="phone_number">Direccion</label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="Ingrese su direccion" [ngModel]="cli['address']">
+      </div>
+      <div class="form-group">
+        <label for="phone_number">Ciudad</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="Ingrese su ciudad" [ngModel]="cli['city']">
+      </div>
+      <input type="hidden" class="form-control" id="id" name="id" [ngModel]="cli['id']">
+    <flash-messages></flash-messages>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Guardar</button>
+      <a type="button" href="#/clients" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Volver</a>
+    </div>
+  </div>
+  </form>
+    

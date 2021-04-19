@@ -81,6 +81,18 @@ Route::get('contacts/single/{id}', 'ContactsController@single');
 
 Route::get('contacts/{id}', 'ContactsController@single');
 
+/** PRODUCTS **/
+
+Route::post('products/create', 'ProductsController@create');
+
+Route::post('products/store', 'ProductsController@store');
+
+Route::post('products/delete', 'ProductsController@delete');
+
+Route::get('products/all', 'ProductsController@all'); 
+
+Route::get('products/{id}', 'ProductsController@single');
+
 /** PASSWORD **/
 
 Route::post('password/update', 'PasswordController@update');

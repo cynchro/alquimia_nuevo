@@ -93,6 +93,10 @@ export const routes: Routes = [
       {
         path: 'clients',
         loadChildren: () => import('./views/clients/clients.module').then(m => m.ClientsModule)
+      },
+      {
+        path: 'products',
+        loadChildren: () => import('./views/products/products.module').then(m => m.ProductsModule)
       }
     ]
   },

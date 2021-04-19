@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
 import { MaterialModules } from '../../material/material.modules';
-import { ClientsComponent } from "./clients.component";
-import { ClientsEditComponent } from "./clients.edit.component";
-import { ClientsCreateComponent } from "./clients.create.component";
-import { ClientsShowComponent } from "./clients.show.component";
-import { ClientsRoutingModule } from "./clients.routing.module";
+import { ProductsComponent } from "./products.component";
+import { ProductsEditComponent } from "./products.edit.component";
+import { ProductsCreateComponent } from "./products.create.component";
+import { ProductsShowComponent } from "./products.show.component";
+import { ProductsRoutingModule } from "./products.routing.module";
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
 import { FlashMessagesModule } from 'flash-messages-angular';
@@ -17,13 +17,13 @@ import { DialogModule } from '../dialog/dialog.module';
 
 @NgModule({
   declarations: [
-    ClientsComponent,
-    ClientsEditComponent,
-    ClientsCreateComponent,
-    ClientsShowComponent
+    ProductsComponent,
+    ProductsEditComponent,
+    ProductsCreateComponent,
+    ProductsShowComponent
   ],
   imports: [
-    ClientsRoutingModule,
+    ProductsRoutingModule,
     MaterialModules,
     HttpClientModule,
     CommonModule,
@@ -36,6 +36,6 @@ import { DialogModule } from '../dialog/dialog.module';
     BsModalRef
   ]
 })
-export class ClientsModule { 
+export class ProductsModule { 
   constructor() {}
 }
