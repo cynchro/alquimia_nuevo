@@ -93,6 +93,18 @@ Route::get('products/all', 'ProductsController@all');
 
 Route::get('products/{id}', 'ProductsController@single');
 
+/** SUPPLIERS **/
+
+Route::post('suppliers/create', 'SuppliersController@create');
+
+Route::post('suppliers/store', 'SuppliersController@store');
+
+Route::post('suppliers/delete', 'SuppliersController@delete');
+
+Route::get('suppliers/all', 'SuppliersController@all');
+
+Route::get('suppliers/{id}', 'SuppliersController@single');
+
 /** PASSWORD **/
 
 Route::post('password/update', 'PasswordController@update');

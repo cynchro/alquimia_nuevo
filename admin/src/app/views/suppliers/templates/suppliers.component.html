@@ -1,7 +1,7 @@
 <div class="card">
   <h5 class="card-header d-flex justify-content-between align-items-center">
     {{ title }}
-    <a href="#/products/create"><mat-icon class="create-icon">add_circle</mat-icon></a>
+    <a href="#/suppliers/create"><mat-icon class="create-icon">add_circle</mat-icon></a>
   </h5>
   <div class="card-body">
 
@@ -22,27 +22,33 @@
       </ng-container>
     
       <!-- Name Column -->
-      <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef > Nombre </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
       </ng-container>
     
       <!-- Email Column -->
-      <ng-container matColumnDef="barcode">
-        <mat-header-cell *matHeaderCellDef> Codigo de barra </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.barcode}} </mat-cell>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
+
+      <!-- Phone Column -->
+      <ng-container matColumnDef="phone_number">
+        <mat-header-cell *matHeaderCellDef> Telefono </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.phone_number}} </mat-cell>
+      </ng-container>
+
+      <!-- Adress Column -->
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef> Direccion </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
       </ng-container>
 
       <!-- Email Column -->
-      <ng-container matColumnDef="may">
-        <mat-header-cell *matHeaderCellDef> Mayorista </mat-header-cell>
-        <mat-cell *matCellDef="let element"> ${{element.may}} </mat-cell>
-      </ng-container>
-
-      <!-- Email Column -->
-      <ng-container matColumnDef="stock">
-        <mat-header-cell *matHeaderCellDef> Stock </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.stock}} </mat-cell>
+      <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef> Ciudad </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">
@@ -52,11 +58,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <a href="#/products/show/{{element.id}}" mat-menu-item>
-              <mat-icon>manage_search</mat-icon> 
-              <span>Ver</span>
-            </a>
-            <a href="#/products/edit/{{element.id}}" mat-menu-item>
+            <a href="#/suppliers/edit/{{element.id}}" mat-menu-item>
               <mat-icon>edit</mat-icon> 
               <span>Editar</span>
             </a>
@@ -93,5 +95,5 @@
     <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
     <button type="button" class="btn btn-primary" (click)="delete()">Continuar</button>
   </div>
-  <input type="hidden" name="id" id="user_id" value="{{modalService.config.initialState.id}}"/>
+  <input type="hidden" name="id" id="supplier_id" value="{{modalService.config.initialState.id}}"/>
 </ng-template>

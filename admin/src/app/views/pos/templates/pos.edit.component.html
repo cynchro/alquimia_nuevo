@@ -1,0 +1,41 @@
+<form #myform="ngForm" (ngSubmit)="update(myform)" class="form form-update">
+<div class="card">
+    <h4 class="card-header d-flex justify-content-between align-items-center">
+      {{ title }}
+    </h4>
+    <div class="card-body">
+    <div class="form-group">
+      <label for="company">Nombre</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese el nombre de usuario" [ngModel]="pos['name']">
+    </div>
+    <div class="form-group">
+      <label for="vat">Email</label>
+      <input type="text" class="form-control" id="email" name="email" placeholder="Ingrese su correo electronico" [ngModel]="pos['email']">
+    </div>
+    <div class="form-group">
+      <label for="vat">Rol</label>
+      <h1><span class="badge badge-warning">{{pos.role_name}}</span></h1>
+    </div>
+    <div class="form-group">
+    <p>¿Cambiar Rol?</p>
+    <label class="switch switch-label switch-pill switch-primary">
+      <input type="checkbox" class="switch-input" (change)="roleStatus($event)">
+      <span data-checked="✓" data-unchecked="✕" class="switch-slider"></span>
+    </label>
+    </div>
+    <div class="form-group" *ngIf="isShown">
+      <label for="role">Rol</label>
+      <select id="role" name="role" class="form-control" ngModel>
+          <option value="" selected hidden>Seleccione un Rol</option>
+          <option ng-reflect-value="0" value="{{rol.id}}" *ngFor="let rol of roles">{{rol.name}}</option>
+      </select>
+    </div>
+  <flash-messages></flash-messages>
+  <input type="hidden" name="id" [ngModel]="id">
+  </div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Guardar</button>
+    <a type="button" href="#/users" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Volver</a>
+  </div>
+</div>
+</form>

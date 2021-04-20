@@ -9,7 +9,7 @@ import { FlashMessagesService } from 'flash-messages-angular';
 })
 export class ProductsCreateComponent implements OnInit {
 
-  title = "Crear Cliente"
+  title = "Crear Producto"
   roles: string;
 
   constructor(

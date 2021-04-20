@@ -29,6 +29,16 @@ export const navItems: INavData[] = [
     name: 'Components'
   },
   {
+    name: 'Clientes',
+    url: '/clients',
+    icon: 'icon-people'
+  },
+  {
+    name: 'Proveedores',
+    url: '/suppliers',
+    icon: 'fa fa-building-o'
+  },
+  {
     name: 'Usuarios',
     url: '/users',
     icon: 'icon-user',
@@ -46,11 +56,6 @@ export const navItems: INavData[] = [
     ]
   },
   {
-    name: 'Clientes',
-    url: '/clients',
-    icon: 'icon-people'
-  },
-  {
     name: 'Productos',
     url: '/products',
     icon: 'icon-briefcase',
@@ -64,6 +69,35 @@ export const navItems: INavData[] = [
         name: 'Compras',
         url: '/purchases',
         icon: 'icon-basket'
+      }
+    ]
+  },
+  {
+    name: 'punto de venta',
+    url: '/pos',
+    icon: 'icon-calculator',
+    children: [
+      {
+        name: 'Sucursal',
+        url: '/subsidiary',
+        icon: 'icon-home'
+      },
+      {
+        name: 'Preventista',
+        url: '/seller',
+        icon: 'icon-briefcase'
+      }
+    ]
+  },
+  {
+    name: 'Configuraciones',
+    url: '/pos',
+    icon: 'fa fa-wrench',
+    children: [
+      {
+        name: 'Tipos de pago',
+        url: '/pay-type',
+        icon: 'fa fa-credit-card'
       }
     ]
   },

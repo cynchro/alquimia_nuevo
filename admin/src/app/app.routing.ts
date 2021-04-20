@@ -97,6 +97,14 @@ export const routes: Routes = [
       {
         path: 'products',
         loadChildren: () => import('./views/products/products.module').then(m => m.ProductsModule)
+      },
+      {
+        path: 'subsidiary',
+        loadChildren: () => import('./views/pos/pos.module').then(m => m.PosModule)
+      },
+      {
+        path: 'suppliers',
+        loadChildren: () => import('./views/suppliers/suppliers.module').then(m => m.SuppliersModule)
       }
     ]
   },

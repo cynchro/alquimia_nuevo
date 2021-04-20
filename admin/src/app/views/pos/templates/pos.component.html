@@ -1,0 +1,137 @@
+<div class="card">
+  <h5 class="card-header d-flex justify-content-between align-items-center">
+    {{ title }}
+  </h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label>Comprobante</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-sticky-note-o"></i></span>
+            </div>
+            <input type="text" id="ticket" name="ticket" placeholder="Comprobante" class="form-control form-control-sm"
+              disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Usuario</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+            </div>
+            <input type="text" id="user" name="user" placeholder="Usuario" class="form-control form-control-sm"
+              disabled>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label>Proveedor</label>
+          <select id="select1" name="select1" class="form-control form-control-sm">
+            <option value="0" ng-reflect-value="0">Please select</option>
+            <option value="1" ng-reflect-value="1">Option #1</option>
+            <option value="2" ng-reflect-value="2">Option #2</option>
+            <option value="3" ng-reflect-value="3">Option #3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tipo de pago</label>
+          <select id="select1" name="select1" class="form-control form-control-sm">
+            <option value="0" ng-reflect-value="0">Please select</option>
+            <option value="1" ng-reflect-value="1">Option #1</option>
+            <option value="2" ng-reflect-value="2">Option #2</option>
+            <option value="3" ng-reflect-value="3">Option #3</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-6">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-4">Descuento (Dinero):</label>
+          <div class="col-sm-8">
+            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" tabindex="1">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-4">Descuento (Porcentaje):</label>
+          <div class="col-sm-8">
+            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" tabindex="1">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-4">Importe (Pagado):</label>
+          <div class="col-sm-8">
+            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" tabindex="1">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-4">Comentarios:</label>
+          <div class="col-sm-8">
+            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" tabindex="1">
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-4 "><b>Subtotal:</b></label>
+          <div class="col-sm-8">
+            <input type="text" name="nombre" id="nombre" class="form-control collection" placeholder="Nombre"
+              tabindex="1" disabled>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-4"><b>Descuento:</b></label>
+          <div class="col-sm-8">
+            <input type="text" name="nombre" id="nombre" class="form-control collection" placeholder="Nombre"
+              tabindex="1" disabled>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-4"><b>Pagado:</b></label>
+          <div class="col-sm-8">
+            <input type="text" name="nombre" id="nombre" class="form-control collection" placeholder="Nombre"
+              tabindex="1" disabled>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-4"><b>Resto:</b></label>
+          <div class="col-sm-8">
+            <input type="text" name="nombre" id="nombre" class="form-control collection" placeholder="Nombre"
+              tabindex="1" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group row">
+          <div class="col">
+            <button type="button" class="btn btn-outline-success btn-lg btn-block">Completar Venta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
