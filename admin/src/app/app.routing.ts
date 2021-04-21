@@ -105,6 +105,10 @@ export const routes: Routes = [
       {
         path: 'suppliers',
         loadChildren: () => import('./views/suppliers/suppliers.module').then(m => m.SuppliersModule)
+      },
+      {
+        path: 'paytype',
+        loadChildren: () => import('./views/paytype/paytype.module').then(m => m.PayTypeModule)
       }
     ]
   },

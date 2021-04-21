@@ -11,8 +11,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fa fa-sticky-note-o"></i></span>
             </div>
-            <input type="text" id="ticket" name="ticket" placeholder="Comprobante" class="form-control form-control-sm"
-              disabled>
+            <input type="text" placeholder="Comprobante" class="form-control form-control-sm" [ngModel]="sl['id']" disabled>
           </div>
         </div>
         <div class="form-group">
@@ -21,7 +20,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fa fa-user"></i></span>
             </div>
-            <input type="text" id="user" name="user" placeholder="Usuario" class="form-control form-control-sm"
+            <input type="text" id="user" name="user" placeholder="Usuario" value="{{username}}" class="form-control form-control-sm"
               disabled>
           </div>
         </div>
@@ -29,20 +28,14 @@
       <div class="col">
         <div class="form-group">
           <label>Proveedor</label>
-          <select id="select1" name="select1" class="form-control form-control-sm">
-            <option value="0" ng-reflect-value="0">Please select</option>
-            <option value="1" ng-reflect-value="1">Option #1</option>
-            <option value="2" ng-reflect-value="2">Option #2</option>
-            <option value="3" ng-reflect-value="3">Option #3</option>
+          <select id="select1" name="suppliers" class="form-control form-control-sm" ngModel>
+            <option value="{{item.id}}" *ngFor="let item of spl">{{item.name}}</option>
           </select>
         </div>
         <div class="form-group">
           <label>Tipo de pago</label>
-          <select id="select1" name="select1" class="form-control form-control-sm">
-            <option value="0" ng-reflect-value="0">Please select</option>
-            <option value="1" ng-reflect-value="1">Option #1</option>
-            <option value="2" ng-reflect-value="2">Option #2</option>
-            <option value="3" ng-reflect-value="3">Option #3</option>
+          <select id="select1" name="paytype" class="form-control form-control-sm" ngModel>
+            <option value="{{item.id}}" *ngFor="let item of pt">{{item.name}}</option>
           </select>
         </div>
       </div>
@@ -53,6 +46,57 @@
         <div class="card">
           <div class="card-body">
 
+            <mat-form-field>
+              <mat-label>Filtro</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+            </mat-form-field>
+
+            <mat-table [dataSource]="dataSourceProducts" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- Id Column -->
+              <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef> Id. </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+              </ng-container>
+
+              <!-- Email Column -->
+              <ng-container matColumnDef="may">
+                <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+                <mat-cell *matCellDef="let element"> ${{element.may}} </mat-cell>
+              </ng-container>
+
+              <!-- Email Column -->
+              <ng-container matColumnDef="stock">
+                <mat-header-cell *matHeaderCellDef> Stock </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.stock}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <mat-header-cell mat-header-cell *matHeaderCellDef> &nbsp; </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let element">
+                  <button mat-button (click)="setItems(element.id)"><i class="fa fa-hand-o-right fa-2x hand-color"></i></button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumnsProducts"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumnsProducts;"></mat-row>
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              </tr>
+            </mat-table>
+            <mat-paginator [ngStyle]="{display: false ? 'block' : 'none'}" [pageSizeOptions]="[6, 10, 25, 100]">
+            </mat-paginator>
+
           </div>
         </div>
       </div>
@@ -61,6 +105,57 @@
         <div class="card">
           <div class="card-body">
 
+            <div class="row row-card">
+              <mat-label class="label-products">Productos Seleccionados</mat-label>
+            </div>
+            <p style="clear:both;"></p>
+            <cdk-virtual-scroll-viewport [itemSize]="20" class="mat-elevation-z8">
+              <mat-table [dataSource]="dataSourceItems" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Id Column -->
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef> Id. </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="description">
+                  <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+                </ng-container>
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="may">
+                  <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> ${{element.may}} </mat-cell>
+                </ng-container>
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="stock">
+                  <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <input type="number" class="form-control form-control-xs" placeholder="1" name="quantity" [(ngModel)]="quantity" (ngModelChange)="quantityCalculate($event)">
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef> &nbsp; </mat-header-cell>
+                  <mat-cell mat-cell *matCellDef="let item">
+                    <button mat-button><i class="fa fa-trash fa-2x trash-color"></i></button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumnsItems"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumnsItems;"></mat-row>
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+              </mat-table>
+            </cdk-virtual-scroll-viewport>
           </div>
         </div>
       </div>
@@ -69,57 +164,53 @@
     <div class="row">
       <div class="col">
         <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4">Descuento (Dinero):</label>
+          <label for="discount" class="col-form-label col-sm-4">Descuento (Dinero):</label>
           <div class="col-sm-8">
-            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" tabindex="1">
+            <input type="text" name="discount" id="discount" class="form-control" placeholder="Descuento en Dinero">
           </div>
         </div>
         <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4">Descuento (Porcentaje):</label>
+          <label for="percent" class="col-form-label col-sm-4">Descuento (Porcentaje):</label>
           <div class="col-sm-8">
-            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" tabindex="1">
+            <input type="text" name="percent" id="percent" class="form-control" placeholder="Porcentaje de Descuento">
           </div>
         </div>
         <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4">Importe (Pagado):</label>
+          <label for="pay" class="col-form-label col-sm-4">Importe (Pagado):</label>
           <div class="col-sm-8">
-            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" tabindex="1">
+            <input type="text" name="pay" id="pay" class="form-control" placeholder="Importe Pagado">
           </div>
         </div>
         <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4">Comentarios:</label>
+          <label for="comments" class="col-form-label col-sm-4">Comentarios:</label>
           <div class="col-sm-8">
-            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" tabindex="1">
+            <input type="text" name="comments" id="comments" class="form-control" placeholder="Comentarios">
           </div>
         </div>
       </div>
       <div class="col">
         <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4 "><b>Subtotal:</b></label>
+          <label for="subtotal" class="col-form-label col-sm-4 "><b>Subtotal:</b></label>
           <div class="col-sm-8">
-            <input type="text" name="nombre" id="nombre" class="form-control collection" placeholder="Nombre"
-              tabindex="1" disabled>
+            <input type="text" name="subtotal" id="subtotal" class="form-control collection" [ngModel]="sl['total']" disabled>
           </div>
         </div>
         <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4"><b>Descuento:</b></label>
+          <label for="discount_pcr" class="col-form-label col-sm-4"><b>Descuento:</b></label>
           <div class="col-sm-8">
-            <input type="text" name="nombre" id="nombre" class="form-control collection" placeholder="Nombre"
-              tabindex="1" disabled>
+            <input type="text" name="discount_pcr" id="discount_pcr" class="form-control collection" [ngModel]="sl['discount']" disabled>
           </div>
         </div>
         <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4"><b>Pagado:</b></label>
+          <label for="payment" class="col-form-label col-sm-4"><b>Pagado:</b></label>
           <div class="col-sm-8">
-            <input type="text" name="nombre" id="nombre" class="form-control collection" placeholder="Nombre"
-              tabindex="1" disabled>
+            <input type="text" name="payment" id="payment" class="form-control collection" [ngModel]="sl['payment']" disabled>
           </div>
         </div>
         <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4"><b>Resto:</b></label>
+          <label for="rest" class="col-form-label col-sm-4"><b>Resto:</b></label>
           <div class="col-sm-8">
-            <input type="text" name="nombre" id="nombre" class="form-control collection" placeholder="Nombre"
-              tabindex="1" disabled>
+            <input type="text" name="rest" id="rest" class="form-control collection" [ngModel]="'0.00'" disabled>
           </div>
         </div>
       </div>

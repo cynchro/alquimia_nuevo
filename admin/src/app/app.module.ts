@@ -34,6 +34,9 @@ import {
   AppSidebarModule,
 } from '@coreui/angular';
 
+//Modal
+import { DialogModule } from './views/dialog/dialog.module';
+
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 
@@ -47,7 +50,8 @@ import { UsersModule } from './views/users/users.module';
 import { LoginModule } from './views/login/login.module';
 import { RolesModule } from './views/roles/roles.module';
 import { ClientsModule } from './views/clients/clients.module';
-import { DialogModule } from './views/dialog/dialog.module';
+import { PayTypeModule } from './views/paytype/paytype.module';
+
 
 @NgModule({
   imports: [
@@ -69,7 +73,8 @@ import { DialogModule } from './views/dialog/dialog.module';
     LoginModule,
     RolesModule,
     ClientsModule,
-    DialogModule
+    DialogModule,
+    PayTypeModule
   ],
   declarations: [
     AppComponent,

@@ -2,9 +2,10 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Dashboard',
+    name: 'Home',
     url: '/dashboard',
-    icon: 'icon-speedometer',
+    icon: 'icon-home',
+    
     badge: {
       variant: 'info',
       text: 'NEW'
@@ -26,7 +27,7 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Components'
+    name: 'Configuraciones'
   },
   {
     name: 'Clientes',
@@ -96,8 +97,30 @@ export const navItems: INavData[] = [
     children: [
       {
         name: 'Tipos de pago',
-        url: '/pay-type',
+        url: '/paytype',
         icon: 'fa fa-credit-card'
+      }
+    ]
+  },  
+  {
+    name: 'Reportes',
+    url: '/pos',
+    icon: 'fa fa-bar-chart',
+    children: [
+      {
+        name: 'Deudores',
+        url: '/paytype',
+        icon: 'fa fa-warning'
+      },
+      {
+        name: 'Ventas',
+        url: '/paytype',
+        icon: 'fa fa-money'
+      },
+      {
+        name: 'Prospectos',
+        url: '/paytype',
+        icon: 'fa fa-file-o'
       }
     ]
   },

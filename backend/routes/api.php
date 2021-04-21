@@ -108,6 +108,36 @@ Route::get('suppliers/{id}', 'SuppliersController@single');
 /** PASSWORD **/
 
 Route::post('password/update', 'PasswordController@update');
+
+/** PAY TYPE **/
+
+Route::post('paytype/create', 'PayTypeController@create');
+
+Route::post('paytype/store', 'PayTypeController@store');
+
+Route::post('paytype/delete', 'PayTypeController@delete');
+
+Route::get('paytype/all', 'PayTypeController@all');
+
+Route::get('paytype/{id}', 'PayTypeController@single');
+
+/** SALES **/
+
+Route::post('sales/verify', 'SalesController@verify');
+
+Route::post('sales/items/add', 'SalesController@itemsAdd');
+
+Route::get('sales/items/{id}', 'SalesController@items');
+
+/*
+
+Route::post('paytype/store', 'PayTypeController@store');
+
+Route::post('paytype/delete', 'PayTypeController@delete');
+
+Route::get('paytype/all', 'PayTypeController@all');
+
+Route::get('paytype/{id}', 'PayTypeController@single');*/
     
     
 });

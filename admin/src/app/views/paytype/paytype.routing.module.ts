@@ -1,34 +1,34 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PosComponent } from "./pos.component";
-//import { PosCreateComponent } from "./pos.create.component";
-//import { PosEditComponent } from "./pos.edit.component";
+import { PayTypeComponent } from "./paytype.component";
+import { PayTypeCreateComponent } from "./paytype.create.component";
+import { PayTypeEditComponent } from "./paytype.edit.component";
 import { AuthGuard } from '../../_guards/auth.guards';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: PosComponent,
+    component: PayTypeComponent,
     canActivate: [AuthGuard], 
     data: {
-      title: 'Punto de Venta'
+      title: 'Tipos de Pago'
     }
-  },/*
+  },
   {
     path: 'create',
-    component: PosCreateComponent,
+    component: PayTypeCreateComponent,
     data: {
-      title: 'Crear Usuario'
+      title: 'Crear Tipo de Pago'
     }
   },
   {
     path: 'edit/:id',
-    component: PosEditComponent,
+    component: PayTypeEditComponent,
     data: {
-      title: 'Editar Usuario'
+      title: 'Editar Tipo de Pago'
     }
-  }*/
+  }
 ];
 
 @NgModule({
@@ -36,4 +36,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PosRoutingModule { }
+export class PayTypeRoutingModule { }

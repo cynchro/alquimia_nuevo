@@ -128,3 +128,60 @@ td.mat-column-star {
   background: rgb(255, 255, 255);
   border: none;
 }
+
+.hand-color {
+  color: rgb(58, 128, 0);
+  border: none;
+  outline: none;
+}
+
+.trash-color {
+  color: rgb(226, 103, 103);
+  border: none;
+  outline: none;
+}
+
+mat-cell:nth-child(1),
+mat-header-cell:nth-child(1) {
+  flex: 0 0 60%;
+}
+
+mat-cell:nth-child(8),
+mat-header-cell:nth-child(8) {
+  flex: 0 0 5%;
+}
+
+cdk-virtual-scroll-viewport {
+  height: 350px;
+}
+
+.input-xs {
+  height: 22px;
+  padding: 5px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.row-card{
+  margin-top: 27px;
+}
+
+.label-products{
+  padding-left: 14px; 
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+}
