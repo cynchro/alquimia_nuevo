@@ -1,10 +1,8 @@
-import { Component,TemplateRef, ViewChild, Input } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+// material-table.component.ts
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { FlashMessagesService } from 'flash-messages-angular';
+import { MatPaginator } from '@angular/material/paginator'; 
+import { MatTableDataSource } from '@angular/material/table';
 import { SuppliersService } from '../suppliers/services/suppliers.service';
 import { PayTypeService } from '../paytype/services/paytype.service';
 import { PosService } from './services/pos.service';
@@ -12,48 +10,80 @@ import { ProductsService } from '../products/services/products.service';
 import { TokenStorageService } from '../../_auth/services/token-storage.service';
 
 
-/**
- * @title Basic use of `<table mat-table>`
- */
 @Component({
+  selector: 'app-material-table',
   templateUrl: './templates/pos.component.html',
   styleUrls: ['./css/pos.component.scss']
 })
-
-export class PosComponent{
-
+export class PosComponent implements OnInit {
 
   title = 'Punto de Venta';
-  content: string;
-  displayedColumnsProducts: string[] = ['description', 'may', 'stock', 'actions'];
-  displayedColumnsItems: string[] = ['description', 'may', 'stock', 'actions'];
-  dataSourceProducts: MatTableDataSource<any>;
-  dataSourceItems: MatTableDataSource<any>;
-  modalRef: BsModalRef;
+  username: string;
+  names: string;
   spl = [];
   pt = [];
   vr = [];
   sl = [];
   it = [];
-  username: string;
-  names: string;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort; 
-
-  @ViewChild(MatPaginator) paginatorItems: MatPaginator;
-  @ViewChild(MatSort) sortItems: MatSort; 
   
+  dataSourceOne: MatTableDataSource<any>;
+  displayedColumnsOne: string[] = ['description', 'may', 'stock', 'actions'];
+  @ViewChild('TableOnePaginator', {static: true}) tableOnePaginator: MatPaginator;
+  @ViewChild('TableOneSort', {static: true}) tableOneSort: MatSort;
+
+  dataSourceTwo: MatTableDataSource<any>;
+  displayedColumnsTwo: string[] = ['description', 'may', 'stock', 'actions'];
+  @ViewChild('TableTwoSort', {static: true}) tableTwoSort: MatSort;
+
   constructor(
     private pos: PosService, 
-    public modalService: BsModalService, 
-    private _flashMessagesService : FlashMessagesService,
     private suppliers : SuppliersService,
     private paytype : PayTypeService,
     private products : ProductsService,
-    private tokenStorage: TokenStorageService
-    ) { 
+    private tokenStorage: TokenStorageService,
+  ) {
+    this.dataSourceOne = new MatTableDataSource;
+    this.dataSourceTwo = new MatTableDataSource;
+    this.getProducts();
+    this.getItems();
     this.verify();
+  }
+
+  getProducts(){
+    this.products.getProducts().subscribe(
+      data => {
+        this.dataSourceOne.data = data;
+        this.dataSourceOne.paginator = this.tableOnePaginator;
+        this.dataSourceOne.sort = this.tableOneSort;
+      },
+      err => {
+        return JSON.parse(err.error).message;
+      }
+    );
+  }
+
+  getItems(){
+    this.pos.getItems().subscribe( 
+      data => {
+        this.dataSourceTwo.data = data;
+        this.dataSourceTwo.sort = this.tableTwoSort;
+      },
+      err => {
+        return JSON.parse(err.error).message;
+      }
+    );
+  }
+
+  deleteItems(item_id){
+    let data = {
+      "item_id": item_id
+    };
+    this.pos.postDelItems(data)
+    .subscribe(response => {
+      if(response==200){
+        this.getItems();
+      }
+    });
   }
 
   verify(){
@@ -66,90 +96,32 @@ export class PosComponent{
     });
   }
 
-  getProducts(){
-    this.products.getProducts().subscribe(
-      data => {
-        this.dataSourceProducts = new MatTableDataSource(data);
-        this.dataSourceProducts.paginator = this.paginator;
-        this.dataSourceProducts.sort = this.sort;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceProducts.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSourceProducts.paginator) {
-      this.dataSourceProducts.paginator.firstPage();
-    }
-  }
-
-  getItems(){
-    this.pos.getItems().subscribe( 
-      data => {
-        this.dataSourceItems = new MatTableDataSource(data);
-        this.dataSourceItems.paginator = this.paginatorItems;
-        this.dataSourceItems.sort = this.sortItems;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
-  }
-
   quantityCalculate(newQuantity: string) {
     console.log(newQuantity); 
   }
 
-  setItems(id){
-    console.log(id);
-    console.log(this.sl);
-  }
+  setItems(id, selling_price){
 
-  /*
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceItems.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSourceItems.paginator) {
-      this.dataSourceItems.paginator.firstPage();
+    let data = {
+      "products_id": id,
+      "sale_id": this.sl['id'],
+      "selling_price": selling_price,
+      "quantity": 1
+    };
+  
+    this.pos.postSetItems(data)
+    .subscribe(response => {
+    if(response==200){
+      this.getItems();
     }
-  }*/
-
-
-
-  openModal(template: TemplateRef<any>, id) {
-    const user = { id : id };
-    this.modalRef = this.modalService.show(template, {
-      initialState : user
     });
   }
-/*
-  delete(){
-
-  let data = {
-    "id": (<HTMLInputElement>document.getElementById("user_id")).value
-  };
-
-  this.pos.delete(data)
-
-  .subscribe(response => {
-  if(response==200){
-    this._flashMessagesService.show('El Usuario fue eliminado correctamente!', { cssClass: 'alert-success', timeout: 3000 });
-  }
-  this.modalRef.hide();
-  });
-}*/
 
   getSuppliers(){
     this.suppliers.getSuppliers().subscribe(
       data => this.spl = data,
       err => {
-        this.content = JSON.parse(err.error).message;
+        return JSON.parse(err.error).message;
       }
     );
   }
@@ -158,19 +130,21 @@ export class PosComponent{
     this.paytype.getPayType().subscribe(
       data => this.pt = data,
       err => {
-        this.content = JSON.parse(err.error).message;
+        return JSON.parse(err.error).message;
       }
     );
   }
 
+  ngOnInit() {
 
-
-  ngOnInit(): void {  
     this.getSuppliers();
     this.getPayType();
-    //this.verify();
-    this.getProducts();
-    this.getItems();
-    this.username = this.tokenStorage.getUser().username;      
+    this.username = this.tokenStorage.getUser().username;
+
+   }
+
+  applyFilterOne(filterValue: string) {
+    this.dataSourceOne.filter = filterValue.trim().toLowerCase();
   }
+
 }

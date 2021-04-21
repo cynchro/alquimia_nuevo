@@ -115,11 +115,15 @@ class SalesController extends Controller
                 (salesItems.sale_id, 
                 salesItems.products_id,
                 salesItems.selling_price,
+                salesItems.quantity,
+                salesItems.total,
                 salesItems.created_at,
                 salesItems.updated_at)
                 VALUES 
                 (".$request->sale_id.",
                 ".$request->products_id.",
+                '".$request->selling_price."',
+                '".$request->quantity."',
                 '".$request->selling_price."',
                 '".NOW()."',
                 '".NOW()."')";
@@ -129,6 +133,22 @@ class SalesController extends Controller
         catch(Exception $e){
         dd($e->getMessage());
         }
+        return json_encode(200);
+    }
+
+    public function itemsDel(Request $request)
+    {
+                $SQL = "DELETE FROM 
+                salesItems
+                WHERE
+                (id=".$request->item_id.")";
+        try{
+            DB::delete($SQL);
+        }
+        catch(Exception $e){
+        dd($e->getMessage());
+        }
+
         return json_encode(200);
     }
 

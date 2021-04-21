@@ -64,6 +64,28 @@ export class PosService {
     );
   }
 
+  postSetItems(post){
+
+    return this.http.post(environment.apiUrl + 'sales/items/add', post, { headers: this.headerOptions }).pipe(
+      catchError((err) => {
+        console.log('error caught in set items service')
+        console.error(err['error']['message']);
+        return throwError(err);
+      })
+    );
+  }
+
+  postDelItems(post){
+
+    return this.http.post(environment.apiUrl + 'sales/items/del', post, { headers: this.headerOptions }).pipe(
+      catchError((err) => {
+        console.log('error caught in del items service')
+        console.error(err['error']['message']);
+        return throwError(err);
+      })
+    );
+  }
+
   /*
   postCreate(post){
 

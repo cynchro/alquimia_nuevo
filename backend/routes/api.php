@@ -127,6 +127,8 @@ Route::post('sales/verify', 'SalesController@verify');
 
 Route::post('sales/items/add', 'SalesController@itemsAdd');
 
+Route::post('sales/items/del', 'SalesController@itemsDel');
+
 Route::get('sales/items/{id}', 'SalesController@items');
 
 /*
