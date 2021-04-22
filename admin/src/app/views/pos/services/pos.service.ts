@@ -86,6 +86,38 @@ export class PosService {
     );
   }
 
+  postMultiplierItems(post){
+
+    return this.http.post(environment.apiUrl + 'sales/items/qcalc', post, { headers: this.headerOptions }).pipe(
+      catchError((err) => {
+        console.log('error caught in del items service')
+        console.error(err['error']['message']);
+        return throwError(err);
+      })
+    );
+  }
+
+  getTotalItems(): Observable<any> {
+
+    return this.http.get(environment.apiUrl + 'sales/items/total/1', { headers: this.headerOptions, responseType: 'json' }).pipe(
+      catchError((err) => {
+        console.log('error caught in paytype service')
+        console.error(err['error']['message']);
+        return throwError(err);
+      })
+    );
+  }
+
+  getMoneyDiscount(): Observable<any> {
+
+    return this.http.get(environment.apiUrl + 'sales/items/total/1', { headers: this.headerOptions, responseType: 'json' }).pipe(
+      catchError((err) => {
+        console.log('error caught in paytype service')
+        console.error(err['error']['message']);
+        return throwError(err);
+      })
+    );
+  }
   /*
   postCreate(post){
 

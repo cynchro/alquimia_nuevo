@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
+const SHOP_DATA = 'total-shop';
 
 @Injectable({
   providedIn: 'root'
@@ -46,4 +47,9 @@ export class TokenStorageService {
       var roles = JSON.parse(sessionStorage.getItem(USER_KEY)!);
       return roles['roles'];
   }  
+
+  public saveTotal(total: string): void {
+    window.sessionStorage.removeItem(SHOP_DATA);
+    window.sessionStorage.setItem(SHOP_DATA, total);
+  }
 }

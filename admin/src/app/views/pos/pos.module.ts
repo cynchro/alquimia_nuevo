@@ -11,6 +11,7 @@ import { FlashMessagesModule } from 'flash-messages-angular';
 import { FormsModule } from '@angular/forms';
 import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -27,7 +28,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     FlashMessagesModule.forRoot(),
     ModalModule.forRoot(),
     FormsModule,
-    ScrollingModule
+    ScrollingModule,
+    ReactiveFormsModule
   ],
   providers: [
     BsModalRef

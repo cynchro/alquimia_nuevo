@@ -138,7 +138,7 @@ class SalesController extends Controller
 
     public function itemsDel(Request $request)
     {
-                $SQL = "DELETE FROM 
+        $SQL = "DELETE FROM 
                 salesItems
                 WHERE
                 (id=".$request->item_id.")";
@@ -149,6 +149,38 @@ class SalesController extends Controller
         dd($e->getMessage());
         }
 
+        return json_encode(200);
+    }
+
+    public function itemsTotal(Request $request)
+    {
+        $SQL = "SELECT 
+                SUM(salesItems.total) as total 
+                FROM 
+                salesItems 
+                WHERE 
+                (salesItems.sale_id=".$request->id.")";
+        $items = DB::select($SQL);
+            return json_encode($items);
+    }
+
+    public function itemsQcalc(Request $request){
+
+        $SQL = "UPDATE 
+                salesItems 
+                SET
+                salesItems.quantity='".$request->quantity."', 
+                salesItems.total='".$request->total."',
+                updated_at='".NOW()."'
+                WHERE
+                (salesItems.id=".$request->sales_item_id.")";
+        try{
+            DB::update($SQL);
+        }
+        catch(Exception $e){
+        dd($e->getMessage());
+        }
+                
         return json_encode(200);
     }
 

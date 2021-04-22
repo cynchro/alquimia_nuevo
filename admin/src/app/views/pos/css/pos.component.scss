@@ -151,10 +151,6 @@ mat-header-cell:nth-child(8) {
   flex: 0 0 5%;
 }
 
-cdk-virtual-scroll-viewport {
-  /*height: 350px;*/
-}
-
 .input-xs {
   height: 22px;
   padding: 5px 5px;
@@ -190,4 +186,8 @@ input[type="number"] {
   max-height:38vh;
   overflow-y:scroll;
   overflow-x:hidden;
+}
+
+.card{
+min-height: 458px !important;
 }

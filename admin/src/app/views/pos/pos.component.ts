@@ -20,19 +20,22 @@ export class PosComponent implements OnInit {
   title = 'Punto de Venta';
   username: string;
   names: string;
+  payShop : void;
   spl = [];
   pt = [];
   vr = [];
   sl = [];
   it = [];
-  
+  tt = [];
+  cc = [];
+
   dataSourceOne: MatTableDataSource<any>;
   displayedColumnsOne: string[] = ['description', 'may', 'stock', 'actions'];
   @ViewChild('TableOnePaginator', {static: true}) tableOnePaginator: MatPaginator;
   @ViewChild('TableOneSort', {static: true}) tableOneSort: MatSort;
 
   dataSourceTwo: MatTableDataSource<any>;
-  displayedColumnsTwo: string[] = ['description', 'may', 'stock', 'actions'];
+  displayedColumnsTwo: string[] = ['description', 'selling_price', 'total', 'quantity', 'actions'];
   @ViewChild('TableTwoSort', {static: true}) tableTwoSort: MatSort;
 
   constructor(
@@ -47,6 +50,7 @@ export class PosComponent implements OnInit {
     this.getProducts();
     this.getItems();
     this.verify();
+    this.getTotalItems();
   }
 
   getProducts(){
@@ -82,6 +86,7 @@ export class PosComponent implements OnInit {
     .subscribe(response => {
       if(response==200){
         this.getItems();
+        this.getTotalItems();
       }
     });
   }
@@ -94,10 +99,6 @@ export class PosComponent implements OnInit {
     .subscribe(response => {
       this.sl = response[0]; 
     });
-  }
-
-  quantityCalculate(newQuantity: string) {
-    console.log(newQuantity); 
   }
 
   setItems(id, selling_price){
@@ -113,6 +114,7 @@ export class PosComponent implements OnInit {
     .subscribe(response => {
     if(response==200){
       this.getItems();
+      this.getTotalItems();
     }
     });
   }
@@ -135,16 +137,55 @@ export class PosComponent implements OnInit {
     );
   }
 
+  getTotalItems(){
+    this.pos.getTotalItems().subscribe(
+      data => this.tt = data[0],
+      err => {
+        return JSON.parse(err.error).message;
+      }
+    );
+    
+  }
+
+  posQuantityCalculate(event:any, id, selling_price) {
+    var op = parseFloat(event.target.value)*parseFloat(selling_price);
+
+    let data = {
+      "sales_item_id": id,
+      "total": op,
+      "quantity": event.target.value
+    };
+  
+    this.pos.postMultiplierItems(data)
+    .subscribe(response => {
+    if(response==200){
+      this.getItems();
+      this.getTotalItems();
+    }
+    });
+    
+  }
+
+  moneyDiscount(event:any){
+
+    console.log(event.target.value);
+
+  }
+
+  getPayShop(event:any){
+    this.payShop = event.target.value; 
+  }
+
   ngOnInit() {
 
     this.getSuppliers();
     this.getPayType();
     this.username = this.tokenStorage.getUser().username;
 
+
    }
 
   applyFilterOne(filterValue: string) {
     this.dataSourceOne.filter = filterValue.trim().toLowerCase();
   }
-
 }

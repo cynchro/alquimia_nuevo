@@ -129,6 +129,10 @@ Route::post('sales/items/add', 'SalesController@itemsAdd');
 
 Route::post('sales/items/del', 'SalesController@itemsDel');
 
+Route::post('sales/items/qcalc', 'SalesController@itemsQcalc');
+
+Route::get('sales/items/total/{id}', 'SalesController@itemsTotal');
+
 Route::get('sales/items/{id}', 'SalesController@items');
 
 /*
