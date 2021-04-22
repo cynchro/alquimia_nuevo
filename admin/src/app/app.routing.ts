@@ -109,6 +109,10 @@ export const routes: Routes = [
       {
         path: 'paytype',
         loadChildren: () => import('./views/paytype/paytype.module').then(m => m.PayTypeModule)
+      },
+      {
+        path: 'invoices',
+        loadChildren: () => import('./views/invoices/invoices.module').then(m => m.InvoicesModule)
       }
     ]
   },
