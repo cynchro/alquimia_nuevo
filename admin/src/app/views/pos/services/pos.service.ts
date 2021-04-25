@@ -47,7 +47,7 @@ export class PosService {
 
     return this.http.post(environment.apiUrl + 'sales/verify', post, { headers: this.headerOptions }).pipe(
       catchError((err) => {
-        console.log('error caught in verify service')
+        console.log('error caught in POS verify service')
         console.error(err['error']);
         return throwError(err);
       })
@@ -57,7 +57,7 @@ export class PosService {
   getItems(): Observable<any> {
     return this.http.get(environment.apiUrl + 'sales/items/1', { headers: this.headerOptions, responseType: 'json' }).pipe(
       catchError((err) => {
-        console.log('error caught in products service')
+        console.log('error caught in POS products service')
         console.error(err['error']['message']);
         return throwError(err);
       })
@@ -68,7 +68,7 @@ export class PosService {
 
     return this.http.post(environment.apiUrl + 'sales/items/add', post, { headers: this.headerOptions }).pipe(
       catchError((err) => {
-        console.log('error caught in set items service')
+        console.log('error caught in POS set items service')
         console.error(err['error']['message']);
         return throwError(err);
       })
@@ -79,7 +79,7 @@ export class PosService {
 
     return this.http.post(environment.apiUrl + 'sales/items/del', post, { headers: this.headerOptions }).pipe(
       catchError((err) => {
-        console.log('error caught in del items service')
+        console.log('error caught in POS del items service')
         console.error(err['error']['message']);
         return throwError(err);
       })
@@ -90,7 +90,7 @@ export class PosService {
 
     return this.http.post(environment.apiUrl + 'sales/items/qcalc', post, { headers: this.headerOptions }).pipe(
       catchError((err) => {
-        console.log('error caught in del items service')
+        console.log('error caught in POS calc items service')
         console.error(err['error']['message']);
         return throwError(err);
       })
@@ -101,7 +101,7 @@ export class PosService {
 
     return this.http.get(environment.apiUrl + 'sales/items/total/1', { headers: this.headerOptions, responseType: 'json' }).pipe(
       catchError((err) => {
-        console.log('error caught in paytype service')
+        console.log('error caught in POS paytype service')
         console.error(err['error']['message']);
         return throwError(err);
       })
@@ -112,7 +112,7 @@ export class PosService {
 
     return this.http.get(environment.apiUrl + 'sales/items/total/1', { headers: this.headerOptions, responseType: 'json' }).pipe(
       catchError((err) => {
-        console.log('error caught in paytype service')
+        console.log('error caught in POS paytype service')
         console.error(err['error']['message']);
         return throwError(err);
       })

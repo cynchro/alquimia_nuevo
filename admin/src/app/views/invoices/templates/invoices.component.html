@@ -1,4 +1,9 @@
 
+<div class="card">
+    <div class="card-header noprint">Proforma</div>
+<div class="card-body">
+
+
 <div class="content-wrapper sale-background" ng-app="tutapos">
 
     <!-- Main content -->
@@ -87,18 +92,12 @@
                 </div>
             </div>
         </div>
-
-        <hr class="hidden-print"/>
-        <div class="row">
-            <div class="col-md-8">
-                &nbsp;
-            </div>
-            <div class="col-md-2">
-                <button type="button" onclick="printInvoice()" class="btn btn-info pull-right hidden-print">Imprimir</button>
-            </div>
-            <div class="col-md-2">
-                <a href="" type="button" class="btn btn-info pull-right hidden-print">Volver a la Lista</a>
-            </div>
-        </div>
     </section>
+</div>
+
+</div>
+<div class="card-footer">
+    <button type="submit" class="btn btn-sm btn-primary hidden-print" (click)="printInvoice()"><i class="fa fa-save"></i> Imprimir</button>
+    <a type="button" href="#/users" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Volver</a>
+  </div>
 </div>

@@ -183,11 +183,16 @@ input[type="number"] {
 }
 
 .main-table{
-  max-height:38vh;
+  max-height: 38vh;
+  //min-height: 47vh;
   overflow-y:scroll;
   overflow-x:hidden;
 }
 
 .card{
 min-height: 458px !important;
+}
+
+.form-control-xs{
+  width: 40%;
 }

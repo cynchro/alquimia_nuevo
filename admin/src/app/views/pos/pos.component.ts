@@ -28,13 +28,14 @@ export class PosComponent implements OnInit {
   it = [];
   tt = [];
   cc = [];
+  tableTwo = [];
 
   dataSourceOne: MatTableDataSource<any>;
   displayedColumnsOne: string[] = ['description', 'may', 'stock', 'actions'];
   @ViewChild('TableOnePaginator', {static: true}) tableOnePaginator: MatPaginator;
   @ViewChild('TableOneSort', {static: true}) tableOneSort: MatSort;
 
-  dataSourceTwo: MatTableDataSource<any>;
+  //dataSourceTwo: MatTableDataSource<any>;
   displayedColumnsTwo: string[] = ['description', 'selling_price', 'total', 'quantity', 'actions'];
   @ViewChild('TableTwoSort', {static: true}) tableTwoSort: MatSort;
 
@@ -46,7 +47,7 @@ export class PosComponent implements OnInit {
     private tokenStorage: TokenStorageService,
   ) {
     this.dataSourceOne = new MatTableDataSource;
-    this.dataSourceTwo = new MatTableDataSource;
+    //this.dataSourceTwo = new MatTableDataSource;
     this.getProducts();
     this.getItems();
     this.verify();
@@ -64,18 +65,22 @@ export class PosComponent implements OnInit {
         return JSON.parse(err.error).message;
       }
     );
-  }
+    }
+
 
   getItems(){
     this.pos.getItems().subscribe( 
       data => {
-        this.dataSourceTwo.data = data;
-        this.dataSourceTwo.sort = this.tableTwoSort;
+        //this.dataSourceTwo.data = data;
+        //this.dataSourceTwo.sort = this.tableTwoSort;
+        this.tableTwo = data;
+        //(data);
       },
       err => {
         return JSON.parse(err.error).message;
       }
     );
+    console.log(this.tableTwo);
   }
 
   deleteItems(item_id){
@@ -95,6 +100,7 @@ export class PosComponent implements OnInit {
     let data = {
       "user_id": this.tokenStorage.getUser().id
     };
+
     this.pos.verify(data)
     .subscribe(response => {
       this.sl = response[0]; 
@@ -103,13 +109,14 @@ export class PosComponent implements OnInit {
 
   setItems(id, selling_price){
 
-    let data = {
-      "products_id": id,
-      "sale_id": this.sl['id'],
-      "selling_price": selling_price,
-      "quantity": 1
-    };
-  
+      
+      let data = {
+        "products_id": id,
+        "sale_id": this.sl['id'],
+        "selling_price": selling_price,
+        "quantity": 1
+      };
+    
     this.pos.postSetItems(data)
     .subscribe(response => {
     if(response==200){
@@ -137,6 +144,7 @@ export class PosComponent implements OnInit {
     );
   }
 
+  /** *suma de todos los itmes el total de esto*/
   getTotalItems(){
     this.pos.getTotalItems().subscribe(
       data => this.tt = data[0],
@@ -155,6 +163,8 @@ export class PosComponent implements OnInit {
       "total": op,
       "quantity": event.target.value
     };
+
+    console.log(data);
   
     this.pos.postMultiplierItems(data)
     .subscribe(response => {
@@ -188,4 +198,18 @@ export class PosComponent implements OnInit {
   applyFilterOne(filterValue: string) {
     this.dataSourceOne.filter = filterValue.trim().toLowerCase();
   }
+
+  trackByIndex(index: number, obj: any): any {
+    return index;
+  }
+
+  calcTotal(price,quantity){
+    var op = parseFloat(price)*parseFloat(quantity);
+    return op.toFixed(2);
+  }
+/*
+  calculateMealTotal(quantity: Quantity[]): number {
+    return quantity.reduce((acc, quantity) => acc + quantity.price, 0)
+  }*/
+
 }

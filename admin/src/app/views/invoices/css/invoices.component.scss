@@ -104,3 +104,28 @@ table td {
   .data-right{
       padding-left: 30%;
   }
+
+  @media print{
+    .noprint{
+        display:none;
+    }
+ }
+
+ @media print
+{
+    #pager,
+    form,
+    .no-print
+    {
+        display: none !important;
+        height: 0;
+    }
+
+    html { overflow: hidden; }
+
+    .no-print, .no-print *{
+        display: none !important;
+        height: 0;
+    }
+}
+

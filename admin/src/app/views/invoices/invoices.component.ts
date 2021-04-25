@@ -49,6 +49,10 @@ export class InvoicesComponent{
     });
   }
 
+    //for printing Invoice
+    printInvoice() {
+    window.print();
+  }
 
 
   ngOnInit(): void {  }

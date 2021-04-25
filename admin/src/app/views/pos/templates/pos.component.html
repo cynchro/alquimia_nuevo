@@ -75,7 +75,8 @@
                             <ng-container matColumnDef="actions">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>&nbsp;</th>
                                 <td mat-cell *matCellDef="let product">
-                                    <button mat-button (click)="setItems(product.id, product.may)"><i
+                                    <button mat-button
+                                        (click)="setItems(product.id, product.may, product.description)"><i
                                             class="fa fa-hand-o-right fa-2x hand-color"></i></button>
                                 </td>
                             </ng-container>
@@ -106,55 +107,32 @@
                         <p style="clear:both;"></p>
 
                         <div class="main-table mat-elevation-z8">
-                            <table mat-table matSort [dataSource]="dataSourceTwo" #TableTwoSort="matSort"
-                                style="width: 100%;">
+                            <table class="mat-table" style="width: 100%;">
 
-                                <!-- Column -->
-                                <ng-container matColumnDef="description">
-                                    <th mat-header-cell *matHeaderCellDef>Nombre</th>
-                                    <td mat-cell *matCellDef="let item">{{ item.description }}</td>
-                                </ng-container>
-
-                                <!-- Column -->
-                                <ng-container matColumnDef="selling_price">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
-                                    <td mat-cell *matCellDef="let item">{{ item.selling_price }}</td>
-                                </ng-container>
-
-
-                                <!-- Column -->
-                                <ng-container matColumnDef="total">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
-                                    <td mat-cell *matCellDef="let item">{{ item.total }}</td>
-                                </ng-container>
-
-                                <!-- Column -->
-                                <ng-container matColumnDef="quantity">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
-                                    <td mat-cell *matCellDef="let item">
-
-                                        <input type="number" id="{{ item.id }}" [ngModel]="item.quantity"
-                                            class="form-control form-control-xs" name="quantity"
-                                            (keyup)="posQuantityCalculate($event, item.id, item.selling_price)">
-                                    </td>
-                                </ng-container>
-
-                                <!-- Column -->
-                                <ng-container matColumnDef="actions">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>&nbsp;</th>
-                                    <td mat-cell *matCellDef="let item">
-                                        <button mat-button (click)="deleteItems(item.id)"><i
+                                <tr class="mat-row">
+                                    <th class="mat-header-cell">Nombre</th>
+                                    <th class="mat-header-cell">Precio</th>
+                                    <th class="mat-header-cell">Total</th>
+                                    <th class="mat-header-cell">Cantidad</th>
+                                    <th class="mat-header-cell">&nbsp;</th>
+                                    <th class="mat-header-cell">&nbsp;</th>
+                                </tr>
+                                <tr class="mat-row" *ngFor="let item of tableTwo ; let index=index">
+                                    <td class="mat-cell">{{item.description}}</td>
+                                    <td class="mat-cell"><input matInput type="number" [name]="'precio' + index"
+                                            [(ngModel)]="item.selling_price"></td>
+                                    <td class="mat-cell"><input matInput type="number" [name]="'name' + index"
+                                            [value]="calcTotal(item.selling_price,item.quantity)"></td>
+                                    <td class="mat-cell"><input matInput type="number" [name]="'cantidad' + index"
+                                            [(ngModel)]="item.quantity"></td>
+                                    <td class="mat-cell">
+                                        <button (click)="deleteItems(item.value.id)"><i
                                                 class="fa fa-trash fa-2x trash-color"></i></button>
                                     </td>
-                                </ng-container>
-
-                                <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
-
-                                <tr class="mat-row" *matNoDataRow>
-                                    <td class="mat-cell" colspan="4">No se encontraron coincidencias.</td>
+                                    <!--<td class="mat-cell" *matCellDef="let element">{{calculateMealTotal(element.quantity)}}</td>-->
                                 </tr>
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -231,6 +209,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
         </div>
     </div>
 </div>

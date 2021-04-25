@@ -4,7 +4,8 @@ import { TokenStorageService } from '../../_auth/services/token-storage.service'
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './default-layout.component.html'
+  templateUrl: './default-layout.component.html',
+  styleUrls: ['./scss/default-layout.component.css']
 })
 export class DefaultLayoutComponent implements OnInit{
 
