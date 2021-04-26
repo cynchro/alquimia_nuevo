@@ -1,5 +1,5 @@
 // material-table.component.ts
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator'; 
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,12 +9,12 @@ import { PosService } from './services/pos.service';
 import { ProductsService } from '../products/services/products.service';
 import { TokenStorageService } from '../../_auth/services/token-storage.service';
 
-
 @Component({
   selector: 'app-material-table',
   templateUrl: './templates/pos.component.html',
   styleUrls: ['./css/pos.component.scss']
 })
+
 export class PosComponent implements OnInit {
 
   title = 'Punto de Venta';
@@ -28,14 +28,18 @@ export class PosComponent implements OnInit {
   it = [];
   tt = [];
   cc = [];
+
+  suma = <any>[];
   tableTwo = [];
+  price : any;
+  quantity:any
 
   dataSourceOne: MatTableDataSource<any>;
   displayedColumnsOne: string[] = ['description', 'may', 'stock', 'actions'];
   @ViewChild('TableOnePaginator', {static: true}) tableOnePaginator: MatPaginator;
   @ViewChild('TableOneSort', {static: true}) tableOneSort: MatSort;
 
-  //dataSourceTwo: MatTableDataSource<any>;
+
   displayedColumnsTwo: string[] = ['description', 'selling_price', 'total', 'quantity', 'actions'];
   @ViewChild('TableTwoSort', {static: true}) tableTwoSort: MatSort;
 
@@ -47,12 +51,20 @@ export class PosComponent implements OnInit {
     private tokenStorage: TokenStorageService,
   ) {
     this.dataSourceOne = new MatTableDataSource;
-    //this.dataSourceTwo = new MatTableDataSource;
+
     this.getProducts();
     this.getItems();
     this.verify();
     this.getTotalItems();
+    this.test;
+    
   }
+
+  test(val){
+console.log(val);
+  }
+
+
 
   getProducts(){
     this.products.getProducts().subscribe(
@@ -71,16 +83,13 @@ export class PosComponent implements OnInit {
   getItems(){
     this.pos.getItems().subscribe( 
       data => {
-        //this.dataSourceTwo.data = data;
-        //this.dataSourceTwo.sort = this.tableTwoSort;
         this.tableTwo = data;
-        //(data);
+        //console.log(data);
       },
       err => {
         return JSON.parse(err.error).message;
       }
     );
-    console.log(this.tableTwo);
   }
 
   deleteItems(item_id){
@@ -144,7 +153,7 @@ export class PosComponent implements OnInit {
     );
   }
 
-  /** *suma de todos los itmes el total de esto*/
+  /** *suma de todos los items el total de esto*/
   getTotalItems(){
     this.pos.getTotalItems().subscribe(
       data => this.tt = data[0],
@@ -164,7 +173,7 @@ export class PosComponent implements OnInit {
       "quantity": event.target.value
     };
 
-    console.log(data);
+    //console.log(data);
   
     this.pos.postMultiplierItems(data)
     .subscribe(response => {
@@ -187,12 +196,9 @@ export class PosComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.getSuppliers();
     this.getPayType();
     this.username = this.tokenStorage.getUser().username;
-
-
    }
 
   applyFilterOne(filterValue: string) {
@@ -203,13 +209,11 @@ export class PosComponent implements OnInit {
     return index;
   }
 
-  calcTotal(price,quantity){
+  
+
+  calcSubTotal(price,quantity){
     var op = parseFloat(price)*parseFloat(quantity);
     return op.toFixed(2);
-  }
-/*
-  calculateMealTotal(quantity: Quantity[]): number {
-    return quantity.reduce((acc, quantity) => acc + quantity.price, 0)
-  }*/
 
+  } 
 }

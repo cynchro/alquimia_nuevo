@@ -115,24 +115,28 @@
                                     <th class="mat-header-cell">Total</th>
                                     <th class="mat-header-cell">Cantidad</th>
                                     <th class="mat-header-cell">&nbsp;</th>
-                                    <th class="mat-header-cell">&nbsp;</th>
                                 </tr>
-                                <tr class="mat-row" *ngFor="let item of tableTwo ; let index=index">
+                                <tr class="mat-row" *ngFor="let item of tableTwo ; let i = index">
+                                    <!-- DESCRIPTION-->
                                     <td class="mat-cell">{{item.description}}</td>
-                                    <td class="mat-cell"><input matInput type="number" [name]="'precio' + index"
+                                    
+                                    <!--SELLING PRICE-->
+                                    <td class="mat-cell"><input matInput type="number" [name]="'precio' + i"
                                             [(ngModel)]="item.selling_price"></td>
-                                    <td class="mat-cell"><input matInput type="number" [name]="'name' + index"
-                                            [value]="calcTotal(item.selling_price,item.quantity)"></td>
-                                    <td class="mat-cell"><input matInput type="number" [name]="'cantidad' + index"
+
+                                    <!-- TOTAL -->
+                                    <td class="mat-cell"><input matInput type="number" [name]="'name' + i"
+                                            [value]="item.selling_price*item.quantity"></td>
+
+                                     <!-- QUANTITY -->       
+                                    <td class="mat-cell"><input matInput type="number" [name]="'cantidad' + i"
                                             [(ngModel)]="item.quantity"></td>
                                     <td class="mat-cell">
                                         <button (click)="deleteItems(item.value.id)"><i
                                                 class="fa fa-trash fa-2x trash-color"></i></button>
                                     </td>
-                                    <!--<td class="mat-cell" *matCellDef="let element">{{calculateMealTotal(element.quantity)}}</td>-->
                                 </tr>
                             </table>
-
                         </div>
                     </div>
                 </div>
