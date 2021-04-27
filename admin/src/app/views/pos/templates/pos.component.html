@@ -126,7 +126,7 @@
 
                                     <!-- TOTAL -->
                                     <td class="mat-cell"><input matInput type="number" [name]="'name' + i"
-                                            [value]="item.selling_price*item.quantity"></td>
+                                            [value]="item.selling_price*item.quantity | number :  '1.2-2'"></td>
 
                                      <!-- QUANTITY -->       
                                     <td class="mat-cell"><input matInput type="number" [name]="'cantidad' + i"
