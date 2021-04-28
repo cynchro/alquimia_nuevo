@@ -8,6 +8,7 @@ import { PayTypeService } from '../paytype/services/paytype.service';
 import { PosService } from './services/pos.service';
 import { ProductsService } from '../products/services/products.service';
 import { TokenStorageService } from '../../_auth/services/token-storage.service';
+import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-material-table',
@@ -34,6 +35,16 @@ export class PosComponent implements OnInit {
   price : any;
   quantity:any
 
+  formGroup: FormGroup;
+  subTotal: number = 0;
+  sumaTotal: number = 0;
+  listaFormGroup: any;
+  myFormValueChanges$: any;
+  listaItems = [
+    { nombre: "Item 1", precio: 10, cantidad: 1, subTotal: 10 },
+    { nombre: "Item 2", precio: 50, cantidad: 1, subTotal: 50 }
+  ];
+
   dataSourceOne: MatTableDataSource<any>;
   displayedColumnsOne: string[] = ['description', 'may', 'stock', 'actions'];
   @ViewChild('TableOnePaginator', {static: true}) tableOnePaginator: MatPaginator;
@@ -49,6 +60,7 @@ export class PosComponent implements OnInit {
     private paytype : PayTypeService,
     private products : ProductsService,
     private tokenStorage: TokenStorageService,
+    private formBuilder: FormBuilder
   ) {
     this.dataSourceOne = new MatTableDataSource;
 
@@ -199,6 +211,19 @@ console.log(val);
     this.getSuppliers();
     this.getPayType();
     this.username = this.tokenStorage.getUser().username;
+
+    this.formGroup = this.formBuilder.group({
+      cliente: new FormControl("Prueba de Cliente"),
+      items: this.formBuilder.array([])
+    });
+
+    this.cargarItemsAlFormGroup();
+
+    this.myFormValueChanges$ = this.formGroup.controls["items"].valueChanges;
+
+    this.myFormValueChanges$.subscribe((detalles: any) => this.updateTotals(detalles));
+
+    
    }
 
   applyFilterOne(filterValue: string) {
@@ -209,11 +234,51 @@ console.log(val);
     return index;
   }
 
-  
-
   calcSubTotal(price,quantity){
     var op = parseFloat(price)*parseFloat(quantity);
     return op.toFixed(2);
 
   } 
+
+  get formArr() {
+    return this.formGroup.get("items") as FormArray;
+  }
+
+  cargarItemsAlFormGroup() {
+    for (let item of this.listaItems) {
+      let fbi = this.formBuilder.group({
+        nombres: new FormControl(item.nombre),
+        cantidad: new FormControl(item.cantidad),
+        precio: new FormControl(item.precio),
+        subTotal: new FormControl(item.precio * item.cantidad)
+      });
+      this.sumaTotal += item.cantidad * item.precio;
+
+      (<FormArray>this.formGroup.get("items")).push(fbi);
+    }
+  }
+
+  updateTotals(detalles: any) {
+    const control = <FormArray>this.formGroup.controls["items"];
+    this.sumaTotal = 0;
+    for (let i in detalles) {
+      let lineTotal = +detalles[+i].cantidad * +detalles[+i].precio;
+      console.warn(lineTotal);
+      (<FormArray>this.formGroup.get("items"))
+        .at(+i)
+        .get("subTotal")
+        .setValue(+lineTotal, { emitEvent: false });
+      this.sumaTotal += lineTotal;
+    }
+  }
+
+  onTrackBy(index: number) {
+    return index;
+  }
+  ngOnDestroy(): void {
+    if (this.myFormValueChanges$) {
+      this.myFormValueChanges$.unsubscribe();
+    }
+  }
+  
 }

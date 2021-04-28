@@ -107,36 +107,39 @@
                         <p style="clear:both;"></p>
 
                         <div class="main-table mat-elevation-z8">
-                            <table class="mat-table" style="width: 100%;">
-
-                                <tr class="mat-row">
-                                    <th class="mat-header-cell">Nombre</th>
-                                    <th class="mat-header-cell">Precio</th>
-                                    <th class="mat-header-cell">Total</th>
-                                    <th class="mat-header-cell">Cantidad</th>
-                                    <th class="mat-header-cell">&nbsp;</th>
-                                </tr>
-                                <tr class="mat-row" *ngFor="let item of tableTwo ; let i = index">
-                                    <!-- DESCRIPTION-->
-                                    <td class="mat-cell">{{item.description}}</td>
-                                    
-                                    <!--SELLING PRICE-->
-                                    <td class="mat-cell"><input matInput type="number" [name]="'precio' + i"
-                                            [(ngModel)]="item.selling_price"></td>
-
-                                    <!-- TOTAL -->
-                                    <td class="mat-cell"><input matInput type="number" [name]="'name' + i"
-                                            [value]="item.selling_price*item.quantity | number :  '1.2-2'"></td>
-
-                                     <!-- QUANTITY -->       
-                                    <td class="mat-cell"><input matInput type="number" [name]="'cantidad' + i"
-                                            [(ngModel)]="item.quantity"></td>
-                                    <td class="mat-cell">
-                                        <button (click)="deleteItems(item.value.id)"><i
-                                                class="fa fa-trash fa-2x trash-color"></i></button>
-                                    </td>
-                                </tr>
-                            </table>
+                            <form [formGroup]="formGroup" *ngIf="formArr?.controls.length > 0">
+                                <table border="1" class="table">
+                                  <thead>
+                                    <tr>
+                                      <th>Nombre</th>
+                                      <th>Cantidad</th>
+                                      <th>Precio</th>
+                                      <th>SubTotal</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <ng-container formArrayName="items">
+                                      <tr *ngFor="let item of formArr.controls; trackBy: onTrackBy;  let i = index" [formGroupName]="i">
+                                        <td>
+                                          {{formGroup.value.items[i].nombres}}
+                                        </td>
+                                        <td><input type="text" formControlName="cantidad"></td>
+                                        <td style="text-align: right">{{formGroup.value.items[i].precio}}</td>
+                                        <td style="text-align: right">{{formGroup.value.items[i].subTotal}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td colspan="4" style="text-align: right">Total: {{sumaTotal}}</td>
+                                      </tr>
+                                    </ng-container>
+                              
+                                  </tbody>
+                                </table>
+                              
+                                <p>
+                                  {{formGroup.controls.items.value | json}}
+                                </p>
+                              
+                              </form>
                         </div>
                     </div>
                 </div>
